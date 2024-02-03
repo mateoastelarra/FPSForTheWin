@@ -1,0 +1,27 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Low Poly Shooter Pack Sample",
+	"Description": "A free sample of the Low Poly Shooter Pack. This is a simplistic yet polished FPS template, perfect as a learning tool or prototype project!",
+	"Category": "Plugins",
+	"CreatedBy": "Infima Games",
+	"CreatedByURL": "https://linktr.ee/InfimaGames",
+	"DocsURL": "https://discord.gg/sqPFPe2uuU",
+	"MarketplaceURL": "https://www.unrealengine.com/marketplace/en-US/product/99747f977c16453eb270bcc0d78c3dd4",
+	"SupportURL": "https://discord.gg/sqPFPe2uuU",
+	"EngineVersion": "4.27.0",
+	"CanContainContent": true,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "LPSPSample",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win32",
+				"Win64"
+			]
+		}
+	]
+}
