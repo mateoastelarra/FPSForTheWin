@@ -28,6 +28,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	DeltaSeconds = DeltaTime;
 }
 
 // Called to bind functionality to input
@@ -35,5 +36,30 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &APlayerCharacter::MoveForward);
+	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &APlayerCharacter::MoveRight);
+	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APlayerCharacter::LookUp);
+	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APlayerCharacter::LookRight);
 }
 
+void APlayerCharacter::MoveForward(float value)
+{
+	FVector MovementVector = GetActorForwardVector() * MovementSpeed * value * DeltaSeconds;
+	AddMovementInput(MovementVector);
+}
+
+void APlayerCharacter::MoveRight(float value)
+{
+	FVector MovementVector = GetActorRightVector() * MovementSpeed * value * DeltaSeconds;
+	AddMovementInput(MovementVector);
+}
+
+void APlayerCharacter::LookUp(float value)
+{
+	AddControllerPitchInput(LookSpeed * value * DeltaSeconds);
+}
+
+void APlayerCharacter::LookRight(float value)
+{
+	AddControllerYawInput(LookSpeed * value * DeltaSeconds);
+}

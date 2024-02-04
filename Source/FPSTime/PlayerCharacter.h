@@ -30,9 +30,21 @@ public:
 	class UCameraComponent* Cam;
 
 private:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Combat")
 	float MaxHealth = 100.f;
 
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float MovementSpeed = 10.f;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float LookSpeed = 100.f;
+
 	float CurrentHealth;
+	float DeltaSeconds;
+
+	void MoveForward(float value);
+	void MoveRight(float value);
+	void LookUp(float value);
+	void LookRight(float value);
 
 };
