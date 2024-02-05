@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "PlayerCharacter.generated.h"
 
+class AGun;
+
 UCLASS()
 class FPSTIME_API APlayerCharacter : public ACharacter
 {
@@ -50,4 +52,9 @@ private:
 	void LookUp(float value);
 	void LookRight(float value);
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AGun> GunClass;
+
+	UPROPERTY()
+	AGun* Gun;
 };
