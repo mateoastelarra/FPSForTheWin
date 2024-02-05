@@ -44,4 +44,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float Damage = 10;
 
+	UPROPERTY(EditAnywhere)
+	int MaxBullets = 10;
+
+	int CurrentBullets;
+
 };

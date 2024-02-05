@@ -31,8 +31,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCameraComponent* Cam;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool Walking;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool ShouldChangeWeapon;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
@@ -52,11 +55,15 @@ private:
 	void LookUp(float value);
 	void LookRight(float value);
 
+	void SetGun(int GunIndex);
 	void Shoot();
+	void ChangeWeapon();
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AGun> GunClass;
 
 	UPROPERTY()
-	AGun* Gun;
+	TArray<AGun*> Guns;
+
+	int CurrentGun = 0;
 };

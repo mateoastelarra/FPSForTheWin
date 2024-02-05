@@ -21,10 +21,9 @@ void APlayerCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	CurrentHealth = MaxHealth;
-	
-	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
-	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("SOCKET_Weapon_L"));
-	Gun->SetOwner(this);
+	CurrentGun = 0;
+
+	SetGun(CurrentGun);
 }
 
 // Called every frame
@@ -47,6 +46,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APlayerCharacter::LookUp);
 	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APlayerCharacter::LookRight);
 	PlayerInputComponent->BindAction(TEXT("Shoot"), IE_Pressed, this, &APlayerCharacter::Shoot);
+	PlayerInputComponent->BindAction(TEXT("ChangeWeapon"), IE_Pressed, this, &APlayerCharacter::ChangeWeapon);
 }
 
 void APlayerCharacter::MoveForward(float value)
@@ -71,8 +71,20 @@ void APlayerCharacter::LookRight(float value)
 	AddControllerYawInput(LookSpeed * value * DeltaSeconds);
 }
 
+void APlayerCharacter::SetGun(int GunIndex)
+{
+	Guns.Add(GetWorld()->SpawnActor<AGun>(GunClass));
+	Guns[CurrentGun]->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("SOCKET_Weapon_L"));
+	Guns[CurrentGun]->SetOwner(this);
+}
+
 void APlayerCharacter::Shoot()
 {
 	if (Walking) { return; }
-	Gun->PullTrigger();
+	Guns[CurrentGun]->PullTrigger();
+}
+
+void APlayerCharacter::ChangeWeapon()
+{
+	ShouldChangeWeapon = true;
 }

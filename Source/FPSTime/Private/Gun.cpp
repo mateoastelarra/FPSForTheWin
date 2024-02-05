@@ -25,6 +25,7 @@ void AGun::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	CurrentBullets = MaxBullets;
 }
 
 // Called every frame
@@ -36,7 +37,10 @@ void AGun::Tick(float DeltaTime)
 
 void AGun::PullTrigger()
 {
+	if (CurrentBullets <= 0) { return; }
+
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("SOCKET_MuzzleFlash"));
+	CurrentBullets--;
 
 	APawn* OwnerPawn = Cast<APawn>(GetOwner());
 	if (OwnerPawn == nullptr) { return; }
