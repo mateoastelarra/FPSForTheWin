@@ -2,6 +2,10 @@
 
 
 #include "Gun.h"
+#include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
+#include "Engine/World.h"
+#include "Components/SkeletalMeshComponent.h"
 
 // Sets default values
 AGun::AGun()
@@ -32,6 +36,8 @@ void AGun::Tick(float DeltaTime)
 
 void AGun::PullTrigger()
 {
+	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("SOCKET_MuzzleFlash"));
+
 	APawn* OwnerPawn = Cast<APawn>(GetOwner());
 	if (OwnerPawn == nullptr) { return; }
 
@@ -51,8 +57,11 @@ void AGun::PullTrigger()
 	if (bHit)
 	{
 		FVector ShotDirection = -Rotation.Vector();
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, OutHit.Location, ShotDirection.Rotation());
+
 		AActor* HitActor = OutHit.GetActor();
 		DrawDebugPoint(GetWorld(), OutHit.Location, 20, FColor::Red, true);
+
 		if (HitActor)
 		{
 		}
