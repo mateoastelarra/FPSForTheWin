@@ -52,6 +52,8 @@ private:
 	void LookUp(float value);
 	void LookRight(float value);
 
+	void Shoot();
+
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AGun> GunClass;
 

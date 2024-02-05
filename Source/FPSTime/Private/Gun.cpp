@@ -30,3 +30,32 @@ void AGun::Tick(float DeltaTime)
 
 }
 
+void AGun::PullTrigger()
+{
+	APawn* OwnerPawn = Cast<APawn>(GetOwner());
+	if (OwnerPawn == nullptr) { return; }
+
+	AController* OwnerController = OwnerPawn->GetController();
+	if (OwnerController == nullptr) { return; }
+
+	FVector Start;
+	FRotator Rotation;
+	OwnerController->GetPlayerViewPoint(Start, Rotation);
+
+	FVector End = Start + Rotation.Vector() * MaxRange;
+
+	FHitResult OutHit;
+
+	bool bHit = GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
+	DrawDebugLine(GetWorld(), Start, End, FColor::Red, true);
+	if (bHit)
+	{
+		FVector ShotDirection = -Rotation.Vector();
+		AActor* HitActor = OutHit.GetActor();
+
+		if (HitActor)
+		{
+		}
+	}
+}
+
