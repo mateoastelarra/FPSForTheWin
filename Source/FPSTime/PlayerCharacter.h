@@ -29,6 +29,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCameraComponent* Cam;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool Walking;
+
 private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float MaxHealth = 100.f;

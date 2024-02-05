@@ -29,6 +29,8 @@ void APlayerCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	DeltaSeconds = DeltaTime;
+
+	Walking = GetVelocity().Size() > 0;
 }
 
 // Called to bind functionality to input
