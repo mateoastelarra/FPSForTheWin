@@ -52,7 +52,7 @@ void AGun::PullTrigger()
 	{
 		FVector ShotDirection = -Rotation.Vector();
 		AActor* HitActor = OutHit.GetActor();
-
+		DrawDebugPoint(GetWorld(), OutHit.Location, 20, FColor::Red, true);
 		if (HitActor)
 		{
 		}
