@@ -28,6 +28,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void NotifyActorBeginOverlap(AActor* OtherActor) override;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCameraComponent* Cam;
 
@@ -36,6 +38,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool ShouldHideWeapon;
+
+	void AddHealth(float HealthToAdd);
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Combat")

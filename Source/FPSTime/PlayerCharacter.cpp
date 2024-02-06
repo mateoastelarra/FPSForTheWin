@@ -3,6 +3,7 @@
 
 #include "PlayerCharacter.h"
 #include "Camera/CameraComponent.h"
+#include "HealthCollectable.h"
 #include "Gun.h"
 
 // Sets default values
@@ -37,6 +38,17 @@ void APlayerCharacter::Tick(float DeltaTime)
 	DeltaSeconds = DeltaTime;
 
 	Walking = GetVelocity().Size() > 0;
+}
+
+void APlayerCharacter::NotifyActorBeginOverlap(AActor* OtherActor)
+{
+	Super::NotifyActorBeginOverlap(OtherActor);
+
+	ACollectable* Consumable = Cast<ACollectable>(OtherActor);
+	if (Consumable)
+	{
+		Consumable->Use(this);
+	}
 }
 
 // Called to bind functionality to input
@@ -140,4 +152,7 @@ void APlayerCharacter::AddGun(int GunIndex)
 	}
 }
 
-
+void APlayerCharacter::AddHealth(float HealthToAdd)
+{
+	CurrentHealth = FMath::Min(MaxHealth, CurrentHealth + HealthToAdd);
+}
