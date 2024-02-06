@@ -40,6 +40,7 @@ public:
 	bool ShouldHideWeapon;
 
 	void AddHealth(float HealthToAdd);
+	void AddShield(float ShieldToAdd);
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Combat")

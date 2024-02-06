@@ -156,3 +156,8 @@ void APlayerCharacter::AddHealth(float HealthToAdd)
 {
 	CurrentHealth = FMath::Min(MaxHealth, CurrentHealth + HealthToAdd);
 }
+
+void APlayerCharacter::AddShield(float ShieldToAdd)
+{
+	CurrentShield = FMath::Min(MaxShield, CurrentShield + ShieldToAdd);
+}

@@ -2,6 +2,7 @@
 
 
 #include "Collectable.h"
+#include "Components/PrimitiveComponent.h"
 #include "Components/StaticMeshComponent.h"
 
 // Sets default values
@@ -15,7 +16,6 @@ ACollectable::ACollectable()
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(Root);
-
 }
 
 // Called when the game starts or when spawned
