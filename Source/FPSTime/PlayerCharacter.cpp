@@ -22,7 +22,10 @@ void APlayerCharacter::BeginPlay()
 
 	CurrentHealth = MaxHealth;
 	CurrentGun = 0;
-
+	for (int i = 0; i < GunClasses.Num(); i++)
+	{
+		AddGun(i);
+	}
 	SetGun(CurrentGun);
 }
 
@@ -71,20 +74,56 @@ void APlayerCharacter::LookRight(float value)
 	AddControllerYawInput(LookSpeed * value * DeltaSeconds);
 }
 
-void APlayerCharacter::SetGun(int GunIndex)
-{
-	Guns.Add(GetWorld()->SpawnActor<AGun>(GunClass));
-	Guns[CurrentGun]->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("SOCKET_Weapon_L"));
-	Guns[CurrentGun]->SetOwner(this);
-}
-
 void APlayerCharacter::Shoot()
 {
 	if (Walking) { return; }
 	Guns[CurrentGun]->PullTrigger();
 }
 
+void APlayerCharacter::SetGun(int GunIndex)
+{
+	if (Guns[GunIndex])
+	{
+		Guns[GunIndex]->SetActorHiddenInGame(false);
+		Guns[GunIndex]->SetActorEnableCollision(true);
+	}
+	Guns[GunIndex]->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("SOCKET_Weapon_L"));
+	Guns[GunIndex]->SetOwner(this);
+}
+
+void APlayerCharacter::HideWeapon()
+{
+	if (Guns[CurrentGun])
+	{
+		UE_LOG(LogTemp, Warning, TEXT("HIDE WEAPON"));
+		Guns[CurrentGun]->SetActorHiddenInGame(true);
+		Guns[CurrentGun]->SetActorEnableCollision(false);
+	}
+}
+
 void APlayerCharacter::ChangeWeapon()
 {
-	ShouldChangeWeapon = true;
+	ShouldHideWeapon = true;
+	//GetWorld()->GetTimerManager().SetTimer(ChangeWeaponTimerHandle, this, &APlayerCharacter::HideWeapon, ChangeWeaponRate / 2, false);
+	GetWorld()->GetTimerManager().SetTimer(ChangeWeaponTimerHandle, this, &APlayerCharacter::ShowWeapon, ChangeWeaponRate, false);
 }
+
+void APlayerCharacter::ShowWeapon()
+{
+	HideWeapon();
+	CurrentGun = (CurrentGun + 1) % GunClasses.Num();
+	SetGun(CurrentGun);
+	ShouldShowWeapon = true;
+}
+
+void APlayerCharacter::AddGun(int GunIndex)
+{
+	Guns.Add(GetWorld()->SpawnActor<AGun>(GunClasses[GunIndex]));
+	if (Guns[GunIndex])
+	{
+		Guns[GunIndex]->SetActorHiddenInGame(true);
+		Guns[GunIndex]->SetActorEnableCollision(false);
+	}
+}
+
+

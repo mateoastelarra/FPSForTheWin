@@ -35,7 +35,10 @@ public:
 	bool Walking;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool ShouldChangeWeapon;
+	bool ShouldHideWeapon;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool ShouldShowWeapon;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
@@ -56,14 +59,22 @@ private:
 	void LookRight(float value);
 
 	void SetGun(int GunIndex);
+	void AddGun(int GunIndex);
+	void HideWeapon();
+	void ShowWeapon();
 	void Shoot();
 	void ChangeWeapon();
-
+	
+	
 	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<AGun> GunClass;
+	TArray<TSubclassOf<AGun>> GunClasses;
 
 	UPROPERTY()
 	TArray<AGun*> Guns;
 
+	UPROPERTY(EditAnywhere)
+	float ChangeWeaponRate = 1.f;
+
 	int CurrentGun = 0;
+	FTimerHandle ChangeWeaponTimerHandle;
 };
