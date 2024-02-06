@@ -40,6 +40,8 @@ public:
 private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float MaxHealth = 100.f;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float MaxShield = 100.f;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float MovementSpeed = 10.f;
@@ -49,6 +51,7 @@ private:
 
 	float CurrentHealth;
 	float DeltaSeconds;
+	float CurrentShield = 0.f;
 
 	void MoveForward(float value);
 	void MoveRight(float value);
@@ -62,6 +65,7 @@ private:
 	void Shoot();
 	void ChangeWeapon();
 	
+	void TakeDamage(float Damage);
 	
 	UPROPERTY(EditDefaultsOnly)
 	TArray<TSubclassOf<AGun>> GunClasses;

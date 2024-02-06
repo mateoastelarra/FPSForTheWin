@@ -96,6 +96,22 @@ void APlayerCharacter::ChangeWeapon()
 	GetWorld()->GetTimerManager().SetTimer(ChangeWeaponTimerHandle, this, &APlayerCharacter::ShowWeapon, ChangeWeaponRate, false);
 }
 
+void APlayerCharacter::TakeDamage(float Damage)
+{
+	if (CurrentShield - Damage >= 0)
+	{
+		CurrentShield -= Damage;
+	}
+	else
+	{
+		CurrentHealth += (CurrentShield - Damage);
+		if (CurrentHealth <= 0)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("SURPRISE, YOU ARE DEAD!!"));
+		}
+	}
+}
+
 void APlayerCharacter::ShowWeapon()
 {
 	HideWeapon();
