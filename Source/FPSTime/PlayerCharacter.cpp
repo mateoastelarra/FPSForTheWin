@@ -76,7 +76,6 @@ void APlayerCharacter::LookRight(float value)
 
 void APlayerCharacter::Shoot()
 {
-	if (Walking) { return; }
 	Guns[CurrentGun]->PullTrigger();
 }
 
