@@ -37,9 +37,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool ShouldHideWeapon;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool Shooting;
-
 private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float MaxHealth = 100.f;

@@ -77,7 +77,6 @@ void APlayerCharacter::LookRight(float value)
 void APlayerCharacter::Shoot()
 {
 	if (Walking) { return; }
-	Shooting = true;
 	Guns[CurrentGun]->PullTrigger();
 }
 
@@ -92,17 +91,6 @@ void APlayerCharacter::SetGun(int GunIndex)
 	Guns[GunIndex]->SetOwner(this);
 }
 
-void APlayerCharacter::HideWeapon()
-{
-	ShouldHideWeapon = false;
-	if (Guns[CurrentGun])
-	{
-		UE_LOG(LogTemp, Warning, TEXT("HIDE WEAPON"));
-		Guns[CurrentGun]->SetActorHiddenInGame(true);
-		Guns[CurrentGun]->SetActorEnableCollision(false);
-	}
-}
-
 void APlayerCharacter::ChangeWeapon()
 {
 	ShouldHideWeapon = true;
@@ -114,6 +102,17 @@ void APlayerCharacter::ShowWeapon()
 	HideWeapon();
 	CurrentGun = (CurrentGun + 1) % GunClasses.Num();
 	SetGun(CurrentGun);
+}
+
+void APlayerCharacter::HideWeapon()
+{
+	ShouldHideWeapon = false;
+	if (Guns[CurrentGun])
+	{
+		UE_LOG(LogTemp, Warning, TEXT("HIDE WEAPON"));
+		Guns[CurrentGun]->SetActorHiddenInGame(true);
+		Guns[CurrentGun]->SetActorEnableCollision(false);
+	}
 }
 
 void APlayerCharacter::AddGun(int GunIndex)
