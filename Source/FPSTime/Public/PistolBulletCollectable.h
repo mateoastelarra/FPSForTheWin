@@ -4,24 +4,26 @@
 
 #include "CoreMinimal.h"
 #include "Collectable.h"
-#include "ShieldCollectable.generated.h"
+#include "PistolBulletCollectable.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class FPSTIME_API AShieldCollectable : public ACollectable
+class FPSTIME_API APistolBulletCollectable : public ACollectable
 {
 	GENERATED_BODY()
-
+	
 public:
 	virtual void Use(AActor* User) override;
 
 private:
 	UPROPERTY(EditAnywhere)
-	int MinShieldToAdd = 10;
+	bool IsPistol = true;
 
 	UPROPERTY(EditAnywhere)
-	int MaxShieldToAdd = 100;
+	int MinBulletsToAdd = 4;
 
+	UPROPERTY(EditAnywhere)
+	int MaxBulletsToAdd = 12;
 };

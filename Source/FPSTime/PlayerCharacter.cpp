@@ -152,12 +152,17 @@ void APlayerCharacter::AddGun(int GunIndex)
 	}
 }
 
-void APlayerCharacter::AddHealth(float HealthToAdd)
+void APlayerCharacter::AddHealth(int HealthToAdd)
 {
 	CurrentHealth = FMath::Min(MaxHealth, CurrentHealth + HealthToAdd);
 }
 
-void APlayerCharacter::AddShield(float ShieldToAdd)
+void APlayerCharacter::AddShield(int ShieldToAdd)
 {
 	CurrentShield = FMath::Min(MaxShield, CurrentShield + ShieldToAdd);
+}
+
+void APlayerCharacter::AddPistolBullets(int GunIndex, int BulletsToAdd)
+{
+	Guns[GunIndex]->AddBullets(BulletsToAdd);
 }

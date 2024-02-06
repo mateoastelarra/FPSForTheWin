@@ -25,6 +25,8 @@ public:
 
 	void PullTrigger();
 
+	void AddBullets(int BulletsToAdd);
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;

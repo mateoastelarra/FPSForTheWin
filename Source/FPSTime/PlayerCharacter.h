@@ -39,8 +39,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool ShouldHideWeapon;
 
-	void AddHealth(float HealthToAdd);
-	void AddShield(float ShieldToAdd);
+	void AddHealth(int HealthToAdd);
+	void AddShield(int ShieldToAdd);
+	void AddPistolBullets(int BulletsToAdd, int GunIndex);
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Combat")

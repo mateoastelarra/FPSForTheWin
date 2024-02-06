@@ -72,3 +72,8 @@ void AGun::PullTrigger()
 	}
 }
 
+void AGun::AddBullets(int BulletsToAdd)
+{
+	CurrentBullets += BulletsToAdd;
+}
+
