@@ -77,6 +77,7 @@ void APlayerCharacter::LookRight(float value)
 void APlayerCharacter::Shoot()
 {
 	if (Walking) { return; }
+	Shooting = true;
 	Guns[CurrentGun]->PullTrigger();
 }
 
@@ -93,6 +94,7 @@ void APlayerCharacter::SetGun(int GunIndex)
 
 void APlayerCharacter::HideWeapon()
 {
+	ShouldHideWeapon = false;
 	if (Guns[CurrentGun])
 	{
 		UE_LOG(LogTemp, Warning, TEXT("HIDE WEAPON"));
@@ -104,7 +106,6 @@ void APlayerCharacter::HideWeapon()
 void APlayerCharacter::ChangeWeapon()
 {
 	ShouldHideWeapon = true;
-	//GetWorld()->GetTimerManager().SetTimer(ChangeWeaponTimerHandle, this, &APlayerCharacter::HideWeapon, ChangeWeaponRate / 2, false);
 	GetWorld()->GetTimerManager().SetTimer(ChangeWeaponTimerHandle, this, &APlayerCharacter::ShowWeapon, ChangeWeaponRate, false);
 }
 
@@ -113,7 +114,6 @@ void APlayerCharacter::ShowWeapon()
 	HideWeapon();
 	CurrentGun = (CurrentGun + 1) % GunClasses.Num();
 	SetGun(CurrentGun);
-	ShouldShowWeapon = true;
 }
 
 void APlayerCharacter::AddGun(int GunIndex)

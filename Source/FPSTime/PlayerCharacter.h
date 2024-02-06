@@ -38,7 +38,7 @@ public:
 	bool ShouldHideWeapon;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool ShouldShowWeapon;
+	bool Shooting;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
