@@ -5,6 +5,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Damageable.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
 
 ABaseProjectile::ABaseProjectile()
 {
@@ -14,6 +15,9 @@ ABaseProjectile::ABaseProjectile()
 	RootComponent = ProjectileMesh;
 
 	MovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>("Movement Component");
+
+	TrailParticles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Smoke Trail"));
+	TrailParticles->SetupAttachment(RootComponent);
 }
 
 void ABaseProjectile::BeginPlay()
@@ -35,10 +39,6 @@ void ABaseProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UP
 	if (Damageable && OtherActor != this)
 	{
 		Damageable->TakeDamage(Damage);
-		if (HitParticles)
-		{
-			UGameplayStatics::SpawnEmitterAtLocation(this, HitParticles, GetActorLocation(), GetActorRotation());
-		}
 		if (HitSound)
 		{
 			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
@@ -47,6 +47,10 @@ void ABaseProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UP
 		{
 			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitCameraShakeClass);
 		}
+	}
+	if (HitParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, HitParticles, GetActorLocation(), GetActorRotation());
 	}
 	Destroy();
 }
