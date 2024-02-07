@@ -3,6 +3,9 @@
 
 #include "EnemyTower.h"
 #include "Components/CapsuleComponent.h"
+#include "Camera/CameraShakeBase.h"
+#include "Kismet/GameplayStatics.h"
+#include "BaseProjectile.h"
 
 // Sets default values
 AEnemyTower::AEnemyTower()
@@ -42,5 +45,17 @@ void AEnemyTower::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AEnemyTower::RotateTurret(FVector LookAtTarget)
+{
+	FVector ToTarget = LookAtTarget - TurretMesh->GetComponentLocation();
+	FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.f);
+	TurretMesh->SetWorldRotation(
+		FMath::RInterpTo(
+			TurretMesh->GetComponentRotation(),
+			LookAtRotation,
+			UGameplayStatics::GetWorldDeltaSeconds(this),
+			RotationSpeed));
 }
 
