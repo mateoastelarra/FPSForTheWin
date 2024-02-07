@@ -162,6 +162,7 @@ void APlayerCharacter::TakeDamage(float Damage)
 		if (CurrentHealth <= 0)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("SURPRISE, YOU ARE DEAD!!"));
+			Destroy();
 		}
 	}
 }
