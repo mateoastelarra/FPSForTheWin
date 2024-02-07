@@ -6,6 +6,8 @@
 #include "Camera/CameraShakeBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "BaseProjectile.h"
+#include "FPSTime/PlayerCharacter.h"
+#include "TimerManager.h"
 
 // Sets default values
 AEnemyTower::AEnemyTower()
@@ -31,6 +33,8 @@ void AEnemyTower::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	Player = Cast<APlayerCharacter>(UGameplayStatics::GetPlayerPawn(this, 0));
+	GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, &AEnemyTower::CheckFireCondition, FireRate, true);
 }
 
 // Called every frame
@@ -38,6 +42,11 @@ void AEnemyTower::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (InFireRange())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("In Range"));
+		RotateTurret(Player->GetActorLocation());
+	}
 }
 
 // Called to bind functionality to input
@@ -57,5 +66,35 @@ void AEnemyTower::RotateTurret(FVector LookAtTarget)
 			LookAtRotation,
 			UGameplayStatics::GetWorldDeltaSeconds(this),
 			RotationSpeed));
+}
+
+void AEnemyTower::Fire()
+{
+	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
+	FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
+
+	ABaseProjectile* Projectile = GetWorld()->SpawnActor<ABaseProjectile>(ProjectileClass, Location, Rotation);
+	Projectile->SetOwner(this);
+}
+
+void AEnemyTower::CheckFireCondition()
+{
+	if (Player && InFireRange())
+	{
+		Fire();
+	}
+}
+
+bool AEnemyTower::InFireRange()
+{
+	if (Player)
+	{
+		float DistanceToPlayer = FVector::Distance(GetActorLocation(), Player->GetActorLocation());
+		if (DistanceToPlayer < FireRange)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 

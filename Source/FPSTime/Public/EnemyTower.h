@@ -27,6 +27,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
+	class APlayerCharacter* Player;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* CapsuleComp;
 
@@ -54,6 +56,19 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TSubclassOf<class UCameraShakeBase> DeathCameraShakeClass;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	float FireRange = 200.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	float FireRate = 2.f;
+
+	FTimerHandle FireRateTimerHandle;
+
 	void RotateTurret(FVector LookAtTarget);
 
+	void Fire();
+	
+	void CheckFireCondition();
+
+	bool InFireRange();
 };
