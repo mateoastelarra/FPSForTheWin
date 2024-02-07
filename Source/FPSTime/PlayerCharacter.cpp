@@ -51,7 +51,6 @@ void APlayerCharacter::NotifyActorBeginOverlap(AActor* OtherActor)
 	}
 }
 
-// Called to bind functionality to input
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -108,22 +107,6 @@ void APlayerCharacter::ChangeWeapon()
 	GetWorld()->GetTimerManager().SetTimer(ChangeWeaponTimerHandle, this, &APlayerCharacter::ShowWeapon, ChangeWeaponRate, false);
 }
 
-void APlayerCharacter::TakeDamage(float Damage)
-{
-	if (CurrentShield - Damage >= 0)
-	{
-		CurrentShield -= Damage;
-	}
-	else
-	{
-		CurrentHealth += (CurrentShield - Damage);
-		if (CurrentHealth <= 0)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("SURPRISE, YOU ARE DEAD!!"));
-		}
-	}
-}
-
 void APlayerCharacter::ShowWeapon()
 {
 	HideWeapon();
@@ -165,4 +148,20 @@ void APlayerCharacter::AddShield(int ShieldToAdd)
 void APlayerCharacter::AddPistolBullets(int GunIndex, int BulletsToAdd)
 {
 	Guns[GunIndex]->AddBullets(BulletsToAdd);
+}
+
+void APlayerCharacter::TakeDamage(float Damage)
+{
+	if (CurrentShield - Damage >= 0)
+	{
+		CurrentShield -= Damage;
+	}
+	else
+	{
+		CurrentHealth += (CurrentShield - Damage);
+		if (CurrentHealth <= 0)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("SURPRISE, YOU ARE DEAD!!"));
+		}
+	}
 }
