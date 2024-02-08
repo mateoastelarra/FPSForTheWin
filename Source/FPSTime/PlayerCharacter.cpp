@@ -119,7 +119,6 @@ void APlayerCharacter::HideWeapon()
 	ShouldHideWeapon = false;
 	if (Guns[CurrentGun])
 	{
-		UE_LOG(LogTemp, Warning, TEXT("HIDE WEAPON"));
 		Guns[CurrentGun]->SetActorHiddenInGame(true);
 		Guns[CurrentGun]->SetActorEnableCollision(false);
 	}
@@ -148,21 +147,4 @@ void APlayerCharacter::AddShield(int ShieldToAdd)
 void APlayerCharacter::AddPistolBullets(int GunIndex, int BulletsToAdd)
 {
 	Guns[GunIndex]->AddBullets(BulletsToAdd);
-}
-
-void APlayerCharacter::TakeDamage(float Damage)
-{
-	if (CurrentShield - Damage >= 0)
-	{
-		CurrentShield -= Damage;
-	}
-	else
-	{
-		CurrentHealth += (CurrentShield - Damage);
-		if (CurrentHealth <= 0)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("SURPRISE, YOU ARE DEAD!!"));
-			Destroy();
-		}
-	}
 }

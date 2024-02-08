@@ -4,13 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Damageable.h"
 #include "PlayerCharacter.generated.h"
 
 class AGun;
 
 UCLASS()
-class FPSTIME_API APlayerCharacter : public ACharacter, public IDamageable
+class FPSTIME_API APlayerCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -43,7 +42,6 @@ public:
 	void AddHealth(int HealthToAdd);
 	void AddShield(int ShieldToAdd);
 	void AddPistolBullets(int BulletsToAdd, int GunIndex);
-	virtual void TakeDamage(float Damage) override;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Combat")

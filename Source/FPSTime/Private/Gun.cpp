@@ -5,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/World.h"
+#include "Health.h"
 #include "Components/SkeletalMeshComponent.h"
 
 // Sets default values
@@ -68,6 +69,11 @@ void AGun::PullTrigger()
 
 		if (HitActor)
 		{
+			UHealth* HitHealthComponent = HitActor->FindComponentByClass<UHealth>();
+			if (HitHealthComponent)
+			{
+				HitHealthComponent->TakeDamage(Damage);
+			}
 		}
 	}
 }

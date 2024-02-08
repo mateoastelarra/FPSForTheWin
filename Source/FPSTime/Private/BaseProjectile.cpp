@@ -3,7 +3,7 @@
 
 #include "BaseProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-#include "Damageable.h"
+#include "Health.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
 
@@ -35,10 +35,10 @@ void ABaseProjectile::Tick(float DeltaTime)
 
 void ABaseProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	IDamageable* Damageable = Cast<IDamageable>(OtherActor);
-	if (Damageable && OtherActor != this)
+	UHealth* HealthComponent = OtherActor->FindComponentByClass<UHealth>();;
+	if (HealthComponent && OtherActor != this)
 	{
-		Damageable->TakeDamage(Damage);
+		HealthComponent->TakeDamage(Damage);
 		if (HitSound)
 		{
 			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());

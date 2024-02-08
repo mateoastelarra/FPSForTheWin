@@ -25,7 +25,11 @@ private:
 	UPROPERTY(EditAnywhere)
 	float MaxHealth = 100.f;
 
+	UPROPERTY(EditAnywhere)
+	float MaxShield = 0.f;
+
 	float CurrentHealth;
+	float CurrentShield;
 
 public:	
 	// Called every frame

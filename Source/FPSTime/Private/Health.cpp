@@ -16,6 +16,7 @@ void UHealth::BeginPlay()
 	Super::BeginPlay();
 
 	CurrentHealth = MaxHealth;
+	CurrentShield = MaxShield;
 }
 
 void UHealth::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -26,10 +27,17 @@ void UHealth::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponen
 
 void UHealth::TakeDamage(float Damage)
 {
-	CurrentHealth -= Damage;
-	if (CurrentHealth <= 0)
+	if (CurrentShield - Damage >= 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("ENEMY DEAD"));
+		CurrentShield -= Damage;
+	}
+	else
+	{
+		CurrentHealth += (CurrentShield - Damage);
+		if (CurrentHealth <= 0)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("SURPRISE, YOU ARE DEAD!!"));
+		}
 	}
 }
 
