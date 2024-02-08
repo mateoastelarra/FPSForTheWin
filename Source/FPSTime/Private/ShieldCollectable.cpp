@@ -2,6 +2,7 @@
 
 
 #include "ShieldCollectable.h"
+#include "Health.h"
 #include "FPSTime/PlayerCharacter.h"
 
 void AShieldCollectable::Use(AActor* User)
@@ -10,8 +11,12 @@ void AShieldCollectable::Use(AActor* User)
 	if (Player)
 	{
 		int ShieldToAdd = FMath::RandRange(MinShieldToAdd, MaxShieldToAdd);
-		Player->AddShield(ShieldToAdd);
-		UE_LOG(LogTemp, Warning, TEXT("Community Shield"));
-		Destroy();
+		UHealth* PlayerHealth = Player->FindComponentByClass<UHealth>();
+		if (PlayerHealth)
+		{
+			PlayerHealth->AddShield(ShieldToAdd);
+			UE_LOG(LogTemp, Warning, TEXT("Community Shield"));
+			Destroy();
+		}
 	}
 }

@@ -41,3 +41,13 @@ void UHealth::TakeDamage(float Damage)
 	}
 }
 
+void UHealth::AddHealth(int HealthToAdd)
+{
+	CurrentHealth = FMath::Min(MaxHealth, CurrentHealth + HealthToAdd);
+}
+
+void UHealth::AddShield(int ShieldToAdd)
+{
+	CurrentShield = FMath::Min(MaxShield, CurrentShield + ShieldToAdd);
+}
+

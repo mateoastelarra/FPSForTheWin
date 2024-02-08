@@ -30,6 +30,8 @@ public:
 
 	void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
+	void AddPistolBullets(int BulletsToAdd, int GunIndex);
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCameraComponent* Cam;
 
@@ -39,38 +41,16 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool ShouldHideWeapon;
 
-	void AddHealth(int HealthToAdd);
-	void AddShield(int ShieldToAdd);
-	void AddPistolBullets(int BulletsToAdd, int GunIndex);
+	
 
 private:
-	UPROPERTY(EditAnywhere, Category = "Combat")
-	float MaxHealth = 100.f;
-	UPROPERTY(EditAnywhere, Category = "Combat")
-	float MaxShield = 100.f;
-
+	
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float MovementSpeed = 10.f;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float LookSpeed = 100.f;
 
-	float CurrentHealth;
-	float DeltaSeconds;
-	float CurrentShield = 0.f;
-
-	void MoveForward(float value);
-	void MoveRight(float value);
-	void LookUp(float value);
-	void LookRight(float value);
-
-	void SetGun(int GunIndex);
-	void AddGun(int GunIndex);
-	void HideWeapon();
-	void ShowWeapon();
-	void Shoot();
-	void ChangeWeapon();
-	
 	UPROPERTY(EditDefaultsOnly)
 	TArray<TSubclassOf<AGun>> GunClasses;
 
@@ -82,4 +62,19 @@ private:
 
 	int CurrentGun = 0;
 	FTimerHandle ChangeWeaponTimerHandle;
+	float DeltaSeconds;
+
+	void MoveForward(float value);
+	void MoveRight(float value);
+	void LookUp(float value);
+	void LookRight(float value);
+
+	void SetGun(int GunIndex);
+	void AddGun(int GunIndex);
+	void ChangeWeapon();
+	void HideWeapon();
+	void ShowWeapon();
+	void Shoot();
+	
+	
 };

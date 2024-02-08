@@ -28,7 +28,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	float MaxShield = 0.f;
 
+	UPROPERTY(EditAnywhere)
 	float CurrentHealth;
+
+	UPROPERTY(EditAnywhere)
 	float CurrentShield;
 
 public:	
@@ -36,4 +39,8 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	virtual void TakeDamage(float Damage) override;
+
+	void AddHealth(int HealthToAdd);
+
+	void AddShield(int ShieldToAdd);
 };

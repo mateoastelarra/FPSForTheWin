@@ -21,7 +21,6 @@ void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CurrentHealth = MaxHealth;
 	CurrentGun = 0;
 	for (int i = 0; i < GunClasses.Num(); i++)
 	{
@@ -132,16 +131,6 @@ void APlayerCharacter::AddGun(int GunIndex)
 		Guns[GunIndex]->SetActorHiddenInGame(true);
 		Guns[GunIndex]->SetActorEnableCollision(false);
 	}
-}
-
-void APlayerCharacter::AddHealth(int HealthToAdd)
-{
-	CurrentHealth = FMath::Min(MaxHealth, CurrentHealth + HealthToAdd);
-}
-
-void APlayerCharacter::AddShield(int ShieldToAdd)
-{
-	CurrentShield = FMath::Min(MaxShield, CurrentShield + ShieldToAdd);
 }
 
 void APlayerCharacter::AddPistolBullets(int GunIndex, int BulletsToAdd)

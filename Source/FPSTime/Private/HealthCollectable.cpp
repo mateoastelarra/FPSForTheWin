@@ -1,5 +1,6 @@
 
 #include "HealthCollectable.h"
+#include "Health.h"
 #include "FPSTime/PlayerCharacter.h"
 
 void AHealthCollectable::Use(AActor* User)
@@ -8,8 +9,12 @@ void AHealthCollectable::Use(AActor* User)
 	if (Player)
 	{
 		int HealthToAdd = FMath::RandRange(MinHealthToAdd, MaxHealthToAdd);
-		Player->AddHealth(HealthToAdd);
-		UE_LOG(LogTemp, Warning, TEXT("YUMMY"));
-		Destroy();
+		UHealth* PlayerHealth = Player->FindComponentByClass<UHealth>();
+		if (PlayerHealth)
+		{
+			PlayerHealth->AddHealth(HealthToAdd);
+			UE_LOG(LogTemp, Warning, TEXT("YUMMY"));
+			Destroy();
+		}	
 	}
 }
