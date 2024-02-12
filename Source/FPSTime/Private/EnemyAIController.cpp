@@ -18,11 +18,12 @@ void AEnemyAIController::BeginPlay()
 
 		UBlackboardComponent* AIBlackboard = GetBlackboardComponent();
 		AIBlackboard->SetValueAsVector(TEXT("StartLocation"), GetPawn()->GetActorLocation());
+		AIBlackboard->SetValueAsVector(TEXT("PlayerLocation"), Player->GetActorLocation());
 	}
 }
 
 void AEnemyAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 }
