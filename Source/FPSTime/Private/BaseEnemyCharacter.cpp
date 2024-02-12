@@ -38,3 +38,8 @@ void ABaseEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 
 }
 
+void ABaseEnemyCharacter::Shoot()
+{
+	Gun->PullTrigger();
+}
+
