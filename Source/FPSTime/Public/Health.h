@@ -43,4 +43,7 @@ public:
 	void AddHealth(int HealthToAdd);
 
 	void AddShield(int ShieldToAdd);
+
+	UFUNCTION(BlueprintPure)
+	bool IsDead() const;
 };

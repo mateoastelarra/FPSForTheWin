@@ -51,3 +51,7 @@ void UHealth::AddShield(int ShieldToAdd)
 	CurrentShield = FMath::Min(MaxShield, CurrentShield + ShieldToAdd);
 }
 
+bool UHealth::IsDead() const
+{
+	return CurrentHealth <= 0;
+}

@@ -22,12 +22,6 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY(EditDefaultsOnly, Category = "Combat")
-	float MaxHealth = 100.f;
-
-	UPROPERTY(VisibleAnywhere, Category = "Combat")
-	float CurrentHealth;
-
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AGun> GunClass;
 
@@ -35,10 +29,8 @@ private:
 	AGun* Gun;
 
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void Shoot();
