@@ -43,4 +43,6 @@ public:
 
 	void Shoot();
 
+	UPROPERTY(EditAnywhere)
+	float ChaseRange = 3000.f;
 };

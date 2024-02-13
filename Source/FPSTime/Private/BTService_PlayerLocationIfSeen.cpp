@@ -23,7 +23,7 @@ void UBTService_PlayerLocationIfSeen::TickNode(UBehaviorTreeComponent& OwnerComp
 	ABaseEnemyCharacter* Enemy = Cast<ABaseEnemyCharacter>(AIController->GetPawn());
 	if (Enemy == nullptr) { return; }
 	//AIController->LineOfSightTo(Player)
-	if (FVector::Distance(Player->GetActorLocation(), Enemy->GetActorLocation()) < 1000)
+	if (FVector::Distance(Player->GetActorLocation(), Enemy->GetActorLocation()) < Enemy->ChaseRange)
 	{
 		OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), Player->GetActorLocation());
 	}
