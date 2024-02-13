@@ -97,3 +97,19 @@ bool AEnemyTower::InFireRange()
 	return false;
 }
 
+void AEnemyTower::Destroyed()
+{
+	if (DeathParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticles, GetActorLocation(), GetActorRotation());
+	}
+	if (DeathSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
+	}
+	if (DeathCameraShakeClass)
+	{
+		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
+	}
+	Destroy();
+}

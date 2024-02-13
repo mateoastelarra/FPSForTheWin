@@ -4,27 +4,26 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Destructible.h"
 #include "EnemyTower.generated.h"
 
 UCLASS()
-class FPSTIME_API AEnemyTower : public APawn
+class FPSTIME_API AEnemyTower : public APawn, public IDestructible
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
 	AEnemyTower();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	virtual void Destroyed() override;
 
 private:
 	class APlayerCharacter* Player;
