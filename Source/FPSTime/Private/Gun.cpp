@@ -7,6 +7,7 @@
 #include "Engine/World.h"
 #include "Health.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "FPSTime/PlayerCharacter.h"
 
 // Sets default values
 AGun::AGun()
@@ -57,7 +58,16 @@ void AGun::PullTrigger()
 
 	FHitResult OutHit;
 
-	bool bHit = GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
+	bool bHit;
+	if (Cast<APlayerCharacter>(OwnerPawn))
+	{
+		bHit = GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
+	}
+	else
+	{
+		bHit = GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, ECollisionChannel::ECC_GameTraceChannel2);
+	}
+
 	DrawDebugLine(GetWorld(), Start, End, FColor::Red, true);
 	if (bHit)
 	{
