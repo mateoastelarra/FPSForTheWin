@@ -3,6 +3,7 @@
 
 #include "BaseEnemyCharacter.h"
 #include "Gun.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 ABaseEnemyCharacter::ABaseEnemyCharacter()
@@ -39,5 +40,13 @@ void ABaseEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 void ABaseEnemyCharacter::Shoot()
 {
 	Gun->PullTrigger();
+}
+
+void ABaseEnemyCharacter::Destroyed()
+{
+	DetachFromControllerPendingDestroy();
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	UE_LOG(LogTemp, Warning, TEXT("SURPRISE, YOU ARE DEAD!!"));
 }
 

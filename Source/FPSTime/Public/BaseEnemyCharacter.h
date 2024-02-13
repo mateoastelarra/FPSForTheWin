@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Destructible.h"
 #include "BaseEnemyCharacter.generated.h"
 
 class AGun;
 
 UCLASS()
-class FPSTIME_API ABaseEnemyCharacter : public ACharacter
+class FPSTIME_API ABaseEnemyCharacter : public ACharacter, public IDestructible
 {
 	GENERATED_BODY()
 
@@ -29,12 +30,16 @@ private:
 	AGun* Gun;
 
 public:	
+	UPROPERTY(EditAnywhere)
+	float ChaseRange = 3000.f;
+
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void Shoot();
 
-	UPROPERTY(EditAnywhere)
-	float ChaseRange = 3000.f;
+	virtual void Destroyed() override;
+
+	
 };

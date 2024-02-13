@@ -2,8 +2,8 @@
 
 
 #include "Health.h"
+#include "Destructible.h"
 
-// Sets default values for this component's properties
 UHealth::UHealth()
 {
 	PrimaryComponentTick.bCanEverTick = true;
@@ -36,7 +36,15 @@ void UHealth::TakeDamage(float Damage)
 		CurrentHealth += (CurrentShield - Damage);
 		if (CurrentHealth <= 0)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("SURPRISE, YOU ARE DEAD!!"));
+			IDestructible* Destructible = Cast<IDestructible>(GetOwner());
+			if (Destructible)
+			{
+				Destructible->Destroyed();
+			}
+			else
+			{
+				UE_LOG(LogTemp, Error, TEXT("Trying to destroy a non destructible object"));
+			}
 		}
 	}
 }
