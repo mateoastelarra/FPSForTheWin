@@ -9,7 +9,6 @@ void AEnemyAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-
 	if (AIBehavior != nullptr)
 	{
 		RunBehaviorTree(AIBehavior);
@@ -18,7 +17,6 @@ void AEnemyAIController::BeginPlay()
 
 		UBlackboardComponent* AIBlackboard = GetBlackboardComponent();
 		AIBlackboard->SetValueAsVector(TEXT("StartLocation"), GetPawn()->GetActorLocation());
-		AIBlackboard->SetValueAsVector(TEXT("PlayerLocation"), Player->GetActorLocation());
 	}
 }
 
