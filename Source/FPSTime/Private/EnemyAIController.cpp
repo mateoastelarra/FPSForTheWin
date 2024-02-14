@@ -16,7 +16,11 @@ void AEnemyAIController::BeginPlay()
 		APawn* Player = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 
 		UBlackboardComponent* AIBlackboard = GetBlackboardComponent();
-		AIBlackboard->SetValueAsVector(TEXT("StartLocation"), GetPawn()->GetActorLocation());
+		if (GetPawn())
+		{
+			AIBlackboard->SetValueAsVector(TEXT("StartLocation"), GetPawn()->GetActorLocation());
+		}
+		
 	}
 }
 
