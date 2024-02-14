@@ -58,7 +58,7 @@ void AEnemyTower::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 void AEnemyTower::RotateTurret(FVector LookAtTarget)
 {
 	FVector ToTarget = LookAtTarget - TurretMesh->GetComponentLocation();
-	FRotator LookAtRotation = FRotator(- ToTarget.Rotation().Pitch, ToTarget.Rotation().Yaw, 0.f);
+	FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.f);
 	TurretMesh->SetWorldRotation(
 		FMath::RInterpTo(
 			TurretMesh->GetComponentRotation(),

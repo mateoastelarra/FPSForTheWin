@@ -2,9 +2,12 @@
 #include "HealthCollectable.h"
 #include "Health.h"
 #include "FPSTime/PlayerCharacter.h"
+#include "Engine/Engine.h"
 
 void AHealthCollectable::Use(AActor* User)
 {
+	Super::Use(User);
+
 	APlayerCharacter* Player = Cast<APlayerCharacter>(User);
 	if (Player)
 	{
@@ -13,7 +16,7 @@ void AHealthCollectable::Use(AActor* User)
 		if (PlayerHealth)
 		{
 			PlayerHealth->AddHealth(HealthToAdd);
-			UE_LOG(LogTemp, Warning, TEXT("YUMMY"));
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, FString::FromInt(HealthToAdd));
 			Destroy();
 		}	
 	}

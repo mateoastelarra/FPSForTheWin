@@ -30,4 +30,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Mesh;
+
+	UPROPERTY(EditAnywhere)
+	FString NameToShowOnScreen;
 };

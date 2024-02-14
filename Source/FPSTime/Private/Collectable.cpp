@@ -4,6 +4,7 @@
 #include "Collectable.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Engine/Engine.h"
 
 // Sets default values
 ACollectable::ACollectable()
@@ -34,6 +35,6 @@ void ACollectable::Tick(float DeltaTime)
 
 void ACollectable::Use(AActor* User)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Used Collectable"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, NameToShowOnScreen);
 }
 

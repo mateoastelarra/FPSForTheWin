@@ -4,9 +4,12 @@
 #include "ShieldCollectable.h"
 #include "Health.h"
 #include "FPSTime/PlayerCharacter.h"
+#include "Engine/Engine.h"
 
 void AShieldCollectable::Use(AActor* User)
 {
+	Super::Use(User);
+
 	APlayerCharacter* Player = Cast<APlayerCharacter>(User);
 	if (Player)
 	{
@@ -15,7 +18,7 @@ void AShieldCollectable::Use(AActor* User)
 		if (PlayerHealth)
 		{
 			PlayerHealth->AddShield(ShieldToAdd);
-			UE_LOG(LogTemp, Warning, TEXT("Community Shield"));
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, FString::FromInt(ShieldToAdd));
 			Destroy();
 		}
 	}
