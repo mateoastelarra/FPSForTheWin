@@ -38,5 +38,5 @@ private:
 	UPROPERTY(EditAnywhere)
 	int AmountOfEnemiesToSpawn;
 
-	void SpawnRandomActorInRandomSpawnPoint();
+	void SpawnRandomActorInSpawnPoint(int index);
 };

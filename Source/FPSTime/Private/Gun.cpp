@@ -42,6 +42,7 @@ void AGun::PullTrigger()
 	if (CurrentBullets <= 0) { return; }
 
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("SOCKET_MuzzleFlash"));
+	UGameplayStatics::PlaySoundAtLocation(this, FireSound, GetActorLocation());
 	CurrentBullets--;
 
 	APawn* OwnerPawn = Cast<APawn>(GetOwner());
@@ -79,6 +80,7 @@ void AGun::PullTrigger()
 
 		if (HitActor)
 		{
+			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
 			UHealth* HitHealthComponent = HitActor->FindComponentByClass<UHealth>();
 			if (HitHealthComponent)
 			{

@@ -25,6 +25,11 @@ void ABaseProjectile::BeginPlay()
 	Super::BeginPlay();
 	
 	ProjectileMesh->OnComponentHit.AddDynamic(this, &ABaseProjectile::OnHit);
+
+	if (LaunchSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, LaunchSound, GetActorLocation());
+	}
 }
 
 void ABaseProjectile::Tick(float DeltaTime)

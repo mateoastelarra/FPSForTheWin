@@ -46,7 +46,6 @@ void ABaseEnemyCharacter::Destroyed()
 {
 	DetachFromControllerPendingDestroy();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
-	UE_LOG(LogTemp, Warning, TEXT("DEAD IN BP"));
+	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 

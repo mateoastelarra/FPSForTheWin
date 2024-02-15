@@ -37,19 +37,19 @@ void ASpawner::NotifyActorBeginOverlap(AActor* OtherActor)
 	{
 		for (int i = 0; i < AmountOfEnemiesToSpawn; i++)
 		{
-			SpawnRandomActorInRandomSpawnPoint();
+			SpawnRandomActorInSpawnPoint(i);
 		}
 		Destroy();
 	}
 }
 
-void ASpawner::SpawnRandomActorInRandomSpawnPoint()
+void ASpawner::SpawnRandomActorInSpawnPoint(int index)
 {
 	int ActorToSpawnIndex = rand() % ActorsToSpawn.Num();
-	int SpawnPointIndex = rand() % SpawnPoints.Num();
+	//int SpawnPointIndex = rand() % SpawnPoints.Num();
 
 	TSubclassOf<AActor> ActorToSpawn = ActorsToSpawn[ActorToSpawnIndex];
-	FVector SpawnLocation = SpawnPoints[SpawnPointIndex]->GetActorLocation();
+	FVector SpawnLocation = SpawnPoints[index]->GetActorLocation();
 
 	GetWorld()->SpawnActor<AActor>(ActorToSpawn, SpawnLocation, GetActorRotation());
 }

@@ -41,6 +41,12 @@ private:
 	UParticleSystem* ImpactEffect;
 
 	UPROPERTY(EditAnywhere)
+	USoundBase* FireSound;
+
+	UPROPERTY(EditAnywhere)
+	USoundBase* HitSound;
+
+	UPROPERTY(EditAnywhere)
 	float MaxRange = 1000.f;
 
 	UPROPERTY(EditAnywhere)
