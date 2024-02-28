@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Destructible.h"
 #include "PlayerCharacter.generated.h"
 
 class AGun;
 
 UCLASS()
-class FPSTIME_API APlayerCharacter : public ACharacter
+class FPSTIME_API APlayerCharacter : public ACharacter, public IDestructible
 {
 	GENERATED_BODY()
 
@@ -31,6 +32,8 @@ public:
 	void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
 	void AddPistolBullets(int BulletsToAdd, int GunIndex);
+
+	virtual void Destroyed() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCameraComponent* Cam;

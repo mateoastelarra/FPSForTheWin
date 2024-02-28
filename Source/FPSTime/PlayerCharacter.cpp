@@ -137,3 +137,8 @@ void APlayerCharacter::AddPistolBullets(int GunIndex, int BulletsToAdd)
 {
 	Guns[GunIndex]->AddBullets(BulletsToAdd);
 }
+
+void APlayerCharacter::Destroyed()
+{
+	Destroy();
+}
