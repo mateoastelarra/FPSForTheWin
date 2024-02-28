@@ -4,7 +4,10 @@
 #include "PlayerCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "HealthCollectable.h"
+#include "Kismet/GameplayStatics.h"
 #include "Gun.h"
+#include "FPSTimeGameModeBase.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -139,6 +142,12 @@ void APlayerCharacter::AddPistolBullets(int GunIndex, int BulletsToAdd)
 }
 
 void APlayerCharacter::Destroyed()
-{
-	Destroy();
+{	
+	AFPSTimeGameModeBase* GameMode = GetWorld()->GetAuthGameMode<AFPSTimeGameModeBase>();
+	if (GameMode)
+	{
+		GameMode->PawnKilled(this);
+	}
+	DetachFromControllerPendingDestroy();
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
