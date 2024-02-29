@@ -65,7 +65,7 @@ void ASpawner::RemoveFromSpawnedActors(IDestructible* EnemyToRemove)
 {
 	if (EnemyToRemove == nullptr) { return; }
 	SpawnedEnemies.Remove(EnemyToRemove);
-	if (SpawnedEnemies.Num() == 0)
+	if (SpawnedEnemies.Num() == 0 && KeyToDrop != nullptr)
 	{
 		TSubclassOf<AActor> ActorToSpawn = KeyToDrop;
 		FVector SpawnLocation = KeySpawnPoint->GetActorLocation();
