@@ -41,5 +41,4 @@ public:
 
 	virtual void Destroyed() override;
 
-	
 };

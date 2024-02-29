@@ -4,6 +4,7 @@
 #include "Spawner.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/BoxComponent.h"
+#include "Destructible.h"
 #include "FPSTime/PlayerCharacter.h"
 
 
@@ -33,24 +34,40 @@ void ASpawner::Tick(float DeltaTime)
 void ASpawner::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	APlayerCharacter* Player = Cast<APlayerCharacter>(OtherActor);
-	if (Player)
+	if (Player && IsActive)
 	{
 		for (int i = 0; i < AmountOfEnemiesToSpawn; i++)
 		{
 			SpawnRandomActorInSpawnPoint(i);
 		}
-		Destroy();
+		IsActive = false;
 	}
 }
 
 void ASpawner::SpawnRandomActorInSpawnPoint(int index)
 {
 	int ActorToSpawnIndex = rand() % ActorsToSpawn.Num();
-	//int SpawnPointIndex = rand() % SpawnPoints.Num();
 
 	TSubclassOf<AActor> ActorToSpawn = ActorsToSpawn[ActorToSpawnIndex];
 	FVector SpawnLocation = SpawnPoints[index]->GetActorLocation();
 
-	GetWorld()->SpawnActor<AActor>(ActorToSpawn, SpawnLocation, GetActorRotation());
+	AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(ActorToSpawn, SpawnLocation, GetActorRotation());
+	IDestructible* SpawnedDestructible = Cast<IDestructible>(SpawnedActor);
+	if (SpawnedDestructible)
+	{
+		SpawnedEnemies.Add(SpawnedDestructible);
+		SpawnedDestructible->EnemySpawner = this;
+		UE_LOG(LogTemp, Warning, TEXT("Spawned: %d"), SpawnedEnemies.Num());
+	}	
+}
+
+void ASpawner::RemoveFromSpawnedActors(IDestructible* EnemyToRemove)
+{
+	SpawnedEnemies.Remove(EnemyToRemove);
+	UE_LOG(LogTemp, Warning, TEXT("Spawned: %d"), SpawnedEnemies.Num());
+	if (SpawnedEnemies.Num() == 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Drop Key"));
+	}
 }
 

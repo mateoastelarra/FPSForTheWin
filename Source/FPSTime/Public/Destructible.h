@@ -22,4 +22,6 @@ class FPSTIME_API IDestructible
 
 public:
 	virtual void Destroyed() = 0;
+
+	class ASpawner* EnemySpawner;
 };

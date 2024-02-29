@@ -8,6 +8,7 @@
 #include "BaseProjectile.h"
 #include "FPSTime/PlayerCharacter.h"
 #include "TimerManager.h"
+#include "Spawner.h"
 
 // Sets default values
 AEnemyTower::AEnemyTower()
@@ -99,6 +100,9 @@ bool AEnemyTower::InFireRange()
 
 void AEnemyTower::Destroyed()
 {
+	if (WasDestroyed) { return; }
+	WasDestroyed = true;
+
 	if (DeathParticles)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticles, GetActorLocation(), GetActorRotation());
@@ -111,5 +115,6 @@ void AEnemyTower::Destroyed()
 	{
 		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
 	}
+	EnemySpawner->RemoveFromSpawnedActors(this);	
 	Destroy();
 }

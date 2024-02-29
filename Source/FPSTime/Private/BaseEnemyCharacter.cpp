@@ -4,6 +4,7 @@
 #include "BaseEnemyCharacter.h"
 #include "Gun.h"
 #include "Components/CapsuleComponent.h"
+#include "Spawner.h"
 
 // Sets default values
 ABaseEnemyCharacter::ABaseEnemyCharacter()
@@ -47,5 +48,6 @@ void ABaseEnemyCharacter::Destroyed()
 	DetachFromControllerPendingDestroy();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	EnemySpawner->RemoveFromSpawnedActors(this);
 }
 

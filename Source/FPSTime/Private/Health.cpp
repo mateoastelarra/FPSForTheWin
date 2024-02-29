@@ -40,6 +40,7 @@ void UHealth::TakeDamage(float Damage)
 			if (Destructible)
 			{
 				Destructible->Destroyed();
+				UE_LOG(LogTemp, Warning, TEXT("Called Destructible method"));
 			}
 			else
 			{

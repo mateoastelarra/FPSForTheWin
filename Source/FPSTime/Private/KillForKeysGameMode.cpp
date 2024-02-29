@@ -6,7 +6,6 @@
 void AKillForKeysGameMode::PawnKilled(APawn* PawnKilled)
 {
 	Super::PawnKilled(PawnKilled);
-	UE_LOG(LogTemp, Warning, TEXT("Killed"));
 	APlayerController* PlayerController = Cast<APlayerController>(PawnKilled->GetController());
 	if (PlayerController)
 	{	

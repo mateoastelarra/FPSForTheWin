@@ -63,6 +63,8 @@ private:
 
 	FTimerHandle FireRateTimerHandle;
 
+	bool WasDestroyed = false;
+
 	void RotateTurret(FVector LookAtTarget);
 
 	void Fire();

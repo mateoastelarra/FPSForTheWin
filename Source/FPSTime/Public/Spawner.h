@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Spawner.generated.h"
 
+class IDestructible;
+
 UCLASS()
 class FPSTIME_API ASpawner : public AActor
 {
@@ -22,6 +24,8 @@ public:
 
 	void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
+	void RemoveFromSpawnedActors(IDestructible* EnemyToRemove);
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
@@ -37,6 +41,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	int AmountOfEnemiesToSpawn;
+
+	bool IsActive = true;
+
+	TArray<IDestructible*> SpawnedEnemies;
 
 	void SpawnRandomActorInSpawnPoint(int index);
 };
