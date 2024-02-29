@@ -14,4 +14,6 @@ class FPSTIME_API AKeyCollectable : public ACollectable
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void Use(AActor* User) override;
 };

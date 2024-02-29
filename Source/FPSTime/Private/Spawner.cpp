@@ -58,7 +58,6 @@ void ASpawner::SpawnRandomActorInSpawnPoint(int index)
 	{
 		SpawnedEnemies.Add(SpawnedDestructible);
 		SpawnedDestructible->EnemySpawner = this;
-		UE_LOG(LogTemp, Warning, TEXT("Spawned: %d"), SpawnedEnemies.Num());
 	}	
 }
 
@@ -66,7 +65,6 @@ void ASpawner::RemoveFromSpawnedActors(IDestructible* EnemyToRemove)
 {
 	if (EnemyToRemove == nullptr) { return; }
 	SpawnedEnemies.Remove(EnemyToRemove);
-	UE_LOG(LogTemp, Warning, TEXT("Spawned: %d"), SpawnedEnemies.Num());
 	if (SpawnedEnemies.Num() == 0)
 	{
 		TSubclassOf<AActor> ActorToSpawn = KeyToDrop;

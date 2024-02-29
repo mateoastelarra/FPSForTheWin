@@ -16,4 +16,13 @@ class FPSTIME_API AKillForKeysGameMode : public AFPSTimeGameModeBase
 
 public:
 	virtual void PawnKilled(APawn* PawnKilled) override;
+
+	void AddKey();
+
+	void LoseKeys(int KeysToLose);
+
+	int GetCurrentKeys();
+
+private:
+	int CurrentKeys = 0;
 };

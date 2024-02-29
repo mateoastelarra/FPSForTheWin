@@ -12,3 +12,18 @@ void AKillForKeysGameMode::PawnKilled(APawn* PawnKilled)
 		PlayerController->GameHasEnded(nullptr, false);
 	}
 }
+
+void AKillForKeysGameMode::AddKey()
+{
+	CurrentKeys++;
+}
+
+void AKillForKeysGameMode::LoseKeys(int KeysToLose)
+{
+	CurrentKeys -= KeysToLose;
+}
+
+int AKillForKeysGameMode::GetCurrentKeys()
+{
+	return CurrentKeys;
+}
