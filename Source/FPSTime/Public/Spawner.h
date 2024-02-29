@@ -37,7 +37,13 @@ private:
 	TArray<AActor*> SpawnPoints;
 
 	UPROPERTY(EditAnywhere)
+	AActor* KeySpawnPoint;
+
+	UPROPERTY(EditAnywhere)
 	TArray<TSubclassOf<AActor>> ActorsToSpawn;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AActor> KeyToDrop;
 
 	UPROPERTY(EditAnywhere)
 	int AmountOfEnemiesToSpawn;

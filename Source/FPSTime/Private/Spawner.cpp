@@ -51,6 +51,7 @@ void ASpawner::SpawnRandomActorInSpawnPoint(int index)
 	TSubclassOf<AActor> ActorToSpawn = ActorsToSpawn[ActorToSpawnIndex];
 	FVector SpawnLocation = SpawnPoints[index]->GetActorLocation();
 
+	if (ActorToSpawn == nullptr) { return; }
 	AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(ActorToSpawn, SpawnLocation, GetActorRotation());
 	IDestructible* SpawnedDestructible = Cast<IDestructible>(SpawnedActor);
 	if (SpawnedDestructible)
@@ -63,11 +64,14 @@ void ASpawner::SpawnRandomActorInSpawnPoint(int index)
 
 void ASpawner::RemoveFromSpawnedActors(IDestructible* EnemyToRemove)
 {
+	if (EnemyToRemove == nullptr) { return; }
 	SpawnedEnemies.Remove(EnemyToRemove);
 	UE_LOG(LogTemp, Warning, TEXT("Spawned: %d"), SpawnedEnemies.Num());
 	if (SpawnedEnemies.Num() == 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Drop Key"));
+		TSubclassOf<AActor> ActorToSpawn = KeyToDrop;
+		FVector SpawnLocation = KeySpawnPoint->GetActorLocation();
+		GetWorld()->SpawnActor<AActor>(ActorToSpawn, SpawnLocation, GetActorRotation());
 	}
 }
 
