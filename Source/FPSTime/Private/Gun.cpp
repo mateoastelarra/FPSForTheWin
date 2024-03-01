@@ -45,34 +45,13 @@ void AGun::PullTrigger()
 	UGameplayStatics::PlaySoundAtLocation(this, FireSound, GetActorLocation());
 	CurrentBullets--;
 
-	APawn* OwnerPawn = Cast<APawn>(GetOwner());
-	if (OwnerPawn == nullptr) { return; }
-
-	AController* OwnerController = OwnerPawn->GetController();
-	if (OwnerController == nullptr) { return; }
-
-	FVector Start;
-	FRotator Rotation;
-	OwnerController->GetPlayerViewPoint(Start, Rotation);
-
-	FVector End = Start + Rotation.Vector() * MaxRange;
-
+	FVector ShotDirection;
 	FHitResult OutHit;
-
-	bool bHit;
-	if (Cast<APlayerCharacter>(OwnerPawn))
-	{
-		bHit = GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
-	}
-	else
-	{
-		bHit = GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, ECollisionChannel::ECC_GameTraceChannel2);
-	}
+	bool bHit = GunTrace(OutHit, ShotDirection);
 
 	//DrawDebugLine(GetWorld(), Start, End, FColor::Red, true);
 	if (bHit)
 	{
-		FVector ShotDirection = -Rotation.Vector();
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, OutHit.Location, ShotDirection.Rotation());
 
 		AActor* HitActor = OutHit.GetActor();
@@ -90,8 +69,33 @@ void AGun::PullTrigger()
 	}
 }
 
+bool AGun::GunTrace(FHitResult& Hit, FVector& ShotDirection)
+{
+	APawn* OwnerPawn = Cast<APawn>(GetOwner());
+	if (OwnerPawn == nullptr) { return false; }
+
+	AController* OwnerController = OwnerPawn->GetController();
+	if (OwnerController == nullptr) { return false; }
+
+	FVector Start;
+	FRotator Rotation;
+	OwnerController->GetPlayerViewPoint(Start, Rotation);
+	ShotDirection = -Rotation.Vector();
+	FVector End = Start + Rotation.Vector() * MaxRange;
+
+	bool bHit;
+	if (Cast<APlayerCharacter>(OwnerPawn))
+	{
+		bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
+	}
+	else
+	{
+		bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECollisionChannel::ECC_GameTraceChannel2);
+	}
+	return bHit;
+}
+
 void AGun::AddBullets(int BulletsToAdd)
 {
 	CurrentBullets += BulletsToAdd;
 }
-

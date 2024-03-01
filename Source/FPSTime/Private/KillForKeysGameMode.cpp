@@ -16,6 +16,7 @@ void AKillForKeysGameMode::PawnKilled(APawn* PawnKilled)
 void AKillForKeysGameMode::AddKey()
 {
 	CurrentKeys++;
+	UE_LOG(LogTemp, Warning, TEXT("KEYS: %d"), CurrentKeys);
 }
 
 void AKillForKeysGameMode::LoseKeys(int KeysToLose)

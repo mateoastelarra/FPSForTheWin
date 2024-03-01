@@ -57,4 +57,5 @@ private:
 
 	int CurrentBullets;
 
+	bool GunTrace(FHitResult& Hit, FVector& ShotDirection);
 };
