@@ -28,3 +28,8 @@ int AKillForKeysGameMode::GetCurrentKeys()
 {
 	return CurrentKeys;
 }
+
+FString AKillForKeysGameMode::GetCurrentKeysUIText()
+{
+	return FString::Printf(TEXT("Keys:  %d"), CurrentKeys);
+}

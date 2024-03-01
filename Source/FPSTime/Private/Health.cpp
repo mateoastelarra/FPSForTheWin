@@ -16,7 +16,7 @@ void UHealth::BeginPlay()
 	Super::BeginPlay();
 
 	CurrentHealth = MaxHealth;
-	CurrentShield = MaxShield;
+	CurrentShield = 0;
 }
 
 void UHealth::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

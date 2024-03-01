@@ -23,6 +23,9 @@ public:
 
 	int GetCurrentKeys();
 
+	UFUNCTION(BlueprintPure)
+	FString GetCurrentKeysUIText();
+
 private:
 	int CurrentKeys = 0;
 };
