@@ -42,6 +42,7 @@ void ACollectable::Use(AActor* User)
 	if (PlayerController)
 	{
 		PlayerController->SetCollectableName(NameToShowOnScreen);
+		PlayerController->SetCollectableUIVisible();
 	}
 }
 

@@ -21,6 +21,8 @@ public:
 
 	void SetCollectableName(FString Name);
 
+	void SetCollectableUIVisible();
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -34,14 +36,26 @@ private:
 	UPROPERTY(EditAnywhere)
 	float RestartDelay = 3.f;
 
+	UPROPERTY(EditAnywhere)
+	float CollectableUIDelay = 2.f;
+
 	UPROPERTY()
 	UUserWidget* HUD;
 
 	FTimerHandle RestartTimer;
 
+	FTimerHandle CollectableUITimer;
+
 	FString CollectableName;
+
+	bool bCollectableUIVisible = false;
 
 	UFUNCTION(BlueprintPure)
 	FString GetCurrentCollectableUIText();
+
+	UFUNCTION(BlueprintPure)
+	ESlateVisibility CollectableTextVisibility();
+
+	void SetCollectableUIInvidible();
 
 };
