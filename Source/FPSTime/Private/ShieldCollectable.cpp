@@ -18,7 +18,6 @@ void AShieldCollectable::Use(AActor* User)
 		if (PlayerHealth)
 		{
 			PlayerHealth->AddShield(ShieldToAdd);
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, FString::FromInt(ShieldToAdd));
 			Destroy();
 		}
 	}

@@ -19,6 +19,8 @@ class FPSTIME_API AFPSTimePlayerController : public APlayerController
 public:
 	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
 
+	void SetCollectableName(FString Name);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -36,4 +38,10 @@ private:
 	UUserWidget* HUD;
 
 	FTimerHandle RestartTimer;
+
+	FString CollectableName;
+
+	UFUNCTION(BlueprintPure)
+	FString GetCurrentCollectableUIText();
+
 };

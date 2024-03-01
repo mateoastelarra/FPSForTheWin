@@ -34,4 +34,13 @@ void AFPSTimePlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
 	GetWorldTimerManager().SetTimer(RestartTimer, this, &APlayerController::RestartLevel, RestartDelay);
 }
 
+void AFPSTimePlayerController::SetCollectableName(FString Name)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Collectable: %s"), *Name);
+	CollectableName = Name;
+}
 
+FString AFPSTimePlayerController::GetCurrentCollectableUIText()
+{
+	return FString::Printf(TEXT("%s pickup"), *CollectableName);
+}

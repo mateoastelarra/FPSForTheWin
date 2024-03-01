@@ -4,6 +4,8 @@
 #include "Collectable.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "FPSTimePlayerController.h"
 #include "Engine/Engine.h"
 
 // Sets default values
@@ -35,6 +37,11 @@ void ACollectable::Tick(float DeltaTime)
 
 void ACollectable::Use(AActor* User)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, NameToShowOnScreen);
+	APlayerController* Controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	AFPSTimePlayerController* PlayerController = Cast<AFPSTimePlayerController>(Controller);
+	if (PlayerController)
+	{
+		PlayerController->SetCollectableName(NameToShowOnScreen);
+	}
 }
 
