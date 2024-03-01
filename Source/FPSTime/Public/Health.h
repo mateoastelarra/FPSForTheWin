@@ -46,4 +46,10 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	bool IsDead() const;
+
+	UFUNCTION(BlueprintPure)
+	float GetHealthPercentage();
+
+	UFUNCTION(BlueprintPure)
+	float GetShieldPercentage();
 };

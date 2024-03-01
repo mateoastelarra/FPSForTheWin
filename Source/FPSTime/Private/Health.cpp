@@ -33,6 +33,7 @@ void UHealth::TakeDamage(float Damage)
 	}
 	else
 	{
+		CurrentShield = 0;
 		CurrentHealth += (CurrentShield - Damage);
 		if (CurrentHealth <= 0)
 		{
@@ -62,4 +63,14 @@ void UHealth::AddShield(int ShieldToAdd)
 bool UHealth::IsDead() const
 {
 	return CurrentHealth <= 0;
+}
+
+float UHealth::GetHealthPercentage()
+{
+	return CurrentHealth / MaxHealth;
+}
+
+float UHealth::GetShieldPercentage()
+{
+	return CurrentShield / MaxShield;
 }

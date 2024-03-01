@@ -78,6 +78,4 @@ private:
 	void HideWeapon();
 	void ShowWeapon();
 	void Shoot();
-	
-	
 };

@@ -9,6 +9,8 @@
 /**
  * 
  */
+class UUserWidget;
+
 UCLASS()
 class FPSTIME_API AFPSTimePlayerController : public APlayerController
 {
@@ -17,12 +19,21 @@ class FPSTIME_API AFPSTimePlayerController : public APlayerController
 public:
 	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
 
+protected:
+	virtual void BeginPlay() override;
+
 private:
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<class UUserWidget> DeadScreenClass;
+	TSubclassOf<UUserWidget> DeadScreenClass;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UUserWidget> CrossHairClass;
 
 	UPROPERTY(EditAnywhere)
 	float RestartDelay = 3.f;
+
+	UPROPERTY()
+	UUserWidget* HUD;
 
 	FTimerHandle RestartTimer;
 };
