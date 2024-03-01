@@ -42,7 +42,7 @@ void AGun::PullTrigger()
 	if (CurrentBullets <= 0) { return; }
 
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("SOCKET_MuzzleFlash"));
-	UGameplayStatics::PlaySoundAtLocation(this, FireSound, GetActorLocation());
+	UGameplayStatics::SpawnSoundAttached(FireSound, Mesh, TEXT("SOCKET_MuzzleFlash"));
 	CurrentBullets--;
 
 	FVector ShotDirection;
@@ -59,7 +59,7 @@ void AGun::PullTrigger()
 
 		if (HitActor)
 		{
-			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), HitSound, OutHit.Location);
 			UHealth* HitHealthComponent = HitActor->FindComponentByClass<UHealth>();
 			if (HitHealthComponent)
 			{
