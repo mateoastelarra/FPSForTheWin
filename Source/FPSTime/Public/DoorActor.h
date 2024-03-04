@@ -35,4 +35,19 @@ private:
 	UPROPERTY(EditAnywhere)
 	int KeysNeededToOpen;
 
+	UPROPERTY(EditAnywhere)
+	FVector MoveOffset;
+
+	UPROPERTY(EditAnywhere)
+	float MoveTime = 4;
+
+	UPROPERTY(EditAnywhere)
+	float MovementPrecission = 0.1;
+
+	bool bShouldMove = false;
+
+	FVector OriginalLocation;
+
+	void Open(float DeltaTime);
+
 };

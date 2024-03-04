@@ -5,6 +5,7 @@
 #include "Components/PrimitiveComponent.h"
 #include "Components/BoxComponent.h"
 #include "FPSTime/PlayerCharacter.h"
+#include "KillForKeysGameMode.h"
 
 // Sets default values
 ADoorActor::ADoorActor()
@@ -27,6 +28,7 @@ void ADoorActor::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	OriginalLocation = GetActorLocation();
 }
 
 // Called every frame
@@ -34,6 +36,10 @@ void ADoorActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (bShouldMove)
+	{
+		Open(DeltaTime);
+	}
 }
 
 void ADoorActor::NotifyActorBeginOverlap(AActor* OtherActor)
@@ -41,7 +47,30 @@ void ADoorActor::NotifyActorBeginOverlap(AActor* OtherActor)
 	APlayerCharacter* Player = Cast<APlayerCharacter>(OtherActor);
 	if (Player)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Jim Morrisson"));
+		AGameModeBase* AuthGameMode = GetWorld()->GetAuthGameMode();
+		AKillForKeysGameMode* CurrentGameMode = Cast<AKillForKeysGameMode>(GetWorld()->GetAuthGameMode());
+		if (CurrentGameMode)
+		{
+			int CurrentKeys = CurrentGameMode->GetCurrentKeys();
+			if (CurrentKeys >= KeysNeededToOpen)
+			{
+				bShouldMove = true;
+				CurrentGameMode->LoseKeys(KeysNeededToOpen);
+			}
+		}
+	}
+}
+
+void ADoorActor::Open(float DeltaTime)
+{
+	FVector TargetLocation = OriginalLocation + MoveOffset;
+	FVector CurrentLocation = GetActorLocation();
+	float Speed = MoveOffset.Length() / MoveTime;
+	FVector NewPosition = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, DeltaTime, Speed);
+	SetActorLocation(NewPosition);
+	if (FVector::Distance(TargetLocation, CurrentLocation) <= MovementPrecission)
+	{
+		bShouldMove = false;
 	}
 }
 
