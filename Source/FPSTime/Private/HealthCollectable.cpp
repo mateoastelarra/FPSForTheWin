@@ -16,7 +16,6 @@ void AHealthCollectable::Use(AActor* User)
 		if (PlayerHealth)
 		{
 			PlayerHealth->AddHealth(HealthToAdd);
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, FString::FromInt(HealthToAdd));
 			Destroy();
 		}	
 	}

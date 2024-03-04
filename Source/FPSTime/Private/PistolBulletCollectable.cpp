@@ -14,7 +14,6 @@ void APistolBulletCollectable::Use(AActor* User)
 	{
 		int BulletsToAdd = FMath::RandRange(MinBulletsToAdd, MaxBulletsToAdd);
 		Player->AddPistolBullets(IsPistol, BulletsToAdd);
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, FString::FromInt(BulletsToAdd));
 		Destroy();
 	}
 }

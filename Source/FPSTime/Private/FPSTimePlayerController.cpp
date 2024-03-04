@@ -42,7 +42,7 @@ void AFPSTimePlayerController::SetCollectableName(FString Name)
 
 FString AFPSTimePlayerController::GetCurrentCollectableUIText()
 {
-	return FString::Printf(TEXT("%s pickup"), *CollectableName);
+	return FString::Printf(TEXT("%s Pickup"), *CollectableName);
 }
 
 ESlateVisibility AFPSTimePlayerController::CollectableTextVisibility()
