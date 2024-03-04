@@ -36,7 +36,6 @@ void AFPSTimePlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
 
 void AFPSTimePlayerController::SetCollectableName(FString Name)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Collectable: %s"), *Name);
 	CollectableName = Name;
 }
 

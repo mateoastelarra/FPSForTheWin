@@ -27,7 +27,7 @@ void AGun::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	CurrentBullets = MaxBullets;
+	CurrentBullets = StartingBullets;
 }
 
 // Called every frame
