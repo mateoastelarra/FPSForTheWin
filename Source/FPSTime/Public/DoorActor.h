@@ -20,7 +20,9 @@ protected:
 public:	
 	virtual void Tick(float DeltaTime) override;
 
-	void NotifyActorBeginOverlap(AActor* OtherActor) override;
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+
+	virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
 
 private:
 	UPROPERTY(VisibleAnywhere)

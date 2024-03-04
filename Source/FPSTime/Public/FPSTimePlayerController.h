@@ -53,9 +53,12 @@ private:
 	UFUNCTION(BlueprintPure)
 	FString GetCurrentCollectableUIText();
 
-	UFUNCTION(BlueprintPure)
-	ESlateVisibility CollectableTextVisibility();
+	UFUNCTION(BluePrintPure)
+	ESlateVisibility SetTextVisibility(bool bIsVisible);
 
-	void SetCollectableUIInvidible();
+	UFUNCTION(BluePrintPure)
+	bool GetbCollectableUIVisible();
+
+	void SetCollectableUIInvisible();
 
 };

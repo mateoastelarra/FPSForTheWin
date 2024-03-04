@@ -44,9 +44,9 @@ FString AFPSTimePlayerController::GetCurrentCollectableUIText()
 	return FString::Printf(TEXT("%s Pickup"), *CollectableName);
 }
 
-ESlateVisibility AFPSTimePlayerController::CollectableTextVisibility()
+ESlateVisibility AFPSTimePlayerController::SetTextVisibility(bool bIsVisible)
 {
-	if (bCollectableUIVisible)
+	if (bIsVisible)
 	{
 		return ESlateVisibility::Visible;
 	}
@@ -59,11 +59,16 @@ void AFPSTimePlayerController::SetCollectableUIVisible()
 	GetWorldTimerManager().SetTimer(
 		CollectableUITimer, 
 		this, 
-		&AFPSTimePlayerController::SetCollectableUIInvidible,
+		&AFPSTimePlayerController::SetCollectableUIInvisible,
 		CollectableUIDelay);
 }
 
-void AFPSTimePlayerController::SetCollectableUIInvidible()
+bool AFPSTimePlayerController::GetbCollectableUIVisible()
+{
+	return bCollectableUIVisible;
+}
+
+void AFPSTimePlayerController::SetCollectableUIInvisible()
 {
 	bCollectableUIVisible = false;
 }

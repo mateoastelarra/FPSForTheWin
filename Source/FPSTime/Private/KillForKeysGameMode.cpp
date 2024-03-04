@@ -2,6 +2,7 @@
 
 
 #include "KillForKeysGameMode.h"
+#include "Blueprint/UserWidget.h"
 
 void AKillForKeysGameMode::PawnKilled(APawn* PawnKilled)
 {
@@ -28,7 +29,26 @@ int AKillForKeysGameMode::GetCurrentKeys()
 	return CurrentKeys;
 }
 
+void AKillForKeysGameMode::SetPlayerMessageUIVisibility(bool bIsVisible)
+{
+	bPlayerMessageUIVisible = bIsVisible;
+}
+
+bool AKillForKeysGameMode::GetPlayerMessageUIVisibility()
+{
+	return bPlayerMessageUIVisible;
+}
+
 FString AKillForKeysGameMode::GetCurrentKeysUIText()
 {
 	return FString::Printf(TEXT("Keys:  %d"), CurrentKeys);
+}
+
+ESlateVisibility AKillForKeysGameMode::SetTextVisibility(bool bIsVisible)
+{
+	if (bIsVisible)
+	{
+		return ESlateVisibility::Visible;
+	}
+	return ESlateVisibility::Hidden;
 }

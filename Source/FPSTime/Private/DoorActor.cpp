@@ -57,6 +57,24 @@ void ADoorActor::NotifyActorBeginOverlap(AActor* OtherActor)
 				bShouldMove = true;
 				CurrentGameMode->LoseKeys(KeysNeededToOpen);
 			}
+			else
+			{
+				CurrentGameMode->SetPlayerMessageUIVisibility(true);
+			}
+		}
+	}
+}
+
+void ADoorActor::NotifyActorEndOverlap(AActor* OtherActor)
+{
+	APlayerCharacter* Player = Cast<APlayerCharacter>(OtherActor);
+	if (Player)
+	{
+		AGameModeBase* AuthGameMode = GetWorld()->GetAuthGameMode();
+		AKillForKeysGameMode* CurrentGameMode = Cast<AKillForKeysGameMode>(GetWorld()->GetAuthGameMode());
+		if (CurrentGameMode)
+		{
+			CurrentGameMode->SetPlayerMessageUIVisibility(false);
 		}
 	}
 }

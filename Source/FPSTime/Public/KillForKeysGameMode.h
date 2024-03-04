@@ -23,9 +23,19 @@ public:
 
 	int GetCurrentKeys();
 
-	UFUNCTION(BlueprintPure)
-	FString GetCurrentKeysUIText();
+	void SetPlayerMessageUIVisibility(bool bIsVisible);
 
 private:
 	int CurrentKeys = 0;
+
+	bool bPlayerMessageUIVisible = false;
+
+	UFUNCTION(BluePrintPure)
+	ESlateVisibility SetTextVisibility(bool bIsVisible);
+
+	UFUNCTION(BlueprintPure)
+	FString GetCurrentKeysUIText();
+
+	UFUNCTION(BlueprintPure)
+	bool GetPlayerMessageUIVisibility();
 };
