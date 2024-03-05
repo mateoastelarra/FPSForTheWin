@@ -57,11 +57,11 @@ void ADoorActor::NotifyActorBeginOverlap(AActor* OtherActor)
 			{
 				bShouldMove = true;
 				CurrentGameMode->LoseKeys(KeysNeededToOpen);
-				PlayerMessage = TEXT("You used The keys.");	
+				PlayerMessage = TEXT("You used ") + FString::FromInt(KeysNeededToOpen) + TEXT(" keys.");
 			}
 			else
 			{
-				PlayerMessage = TEXT("You need 2 keys to open this door.");
+				PlayerMessage = TEXT("You need ") + FString::FromInt(KeysNeededToOpen) + TEXT(" keys to open this door.");
 			}
 			CurrentGameMode->SetPlayerMessage(PlayerMessage);
 			CurrentGameMode->SetPlayerMessageUIVisibility(true);
