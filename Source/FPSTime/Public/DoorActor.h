@@ -17,6 +17,10 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	bool bShouldMove = false;
+
+	FString PlayerMessage;
+
 public:	
 	virtual void Tick(float DeltaTime) override;
 
@@ -35,9 +39,6 @@ private:
 	class UBoxComponent* Trigger;
 
 	UPROPERTY(EditAnywhere)
-	int KeysNeededToOpen;
-
-	UPROPERTY(EditAnywhere)
 	FVector MoveOffset;
 
 	UPROPERTY(EditAnywhere)
@@ -45,8 +46,6 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float MovementPrecission = 0.1;
-
-	bool bShouldMove = false;
 
 	FVector OriginalLocation;
 
