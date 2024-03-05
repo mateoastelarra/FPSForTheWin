@@ -34,6 +34,11 @@ void AKillForKeysGameMode::SetPlayerMessageUIVisibility(bool bIsVisible)
 	bPlayerMessageUIVisible = bIsVisible;
 }
 
+void AKillForKeysGameMode::SetPlayerMessage(FString Message)
+{
+	PlayerMessageUI = Message;
+}
+
 bool AKillForKeysGameMode::GetPlayerMessageUIVisibility()
 {
 	return bPlayerMessageUIVisible;
@@ -42,6 +47,11 @@ bool AKillForKeysGameMode::GetPlayerMessageUIVisibility()
 FString AKillForKeysGameMode::GetCurrentKeysUIText()
 {
 	return FString::Printf(TEXT("Keys:  %d"), CurrentKeys);
+}
+
+FString AKillForKeysGameMode::GetPlayerMessageUIText()
+{
+	return FString::Printf(TEXT("%s"), *PlayerMessageUI);
 }
 
 ESlateVisibility AKillForKeysGameMode::SetTextVisibility(bool bIsVisible)
