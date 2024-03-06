@@ -4,6 +4,7 @@
 #include "FPSTimePlayerController.h"
 #include "TimerManager.h"
 #include "Blueprint/UserWidget.h"
+#include "Kismet/GameplayStatics.h"
 
 void AFPSTimePlayerController::BeginPlay()
 {
@@ -14,6 +15,14 @@ void AFPSTimePlayerController::BeginPlay()
 	{
 		HUD->AddToViewport();
 	}
+}
+
+void AFPSTimePlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	FInputActionBinding& PauseAction = InputComponent->BindAction("Pause", IE_Pressed, this, &AFPSTimePlayerController::PauseGame);
+	PauseAction.bExecuteWhenPaused = true;
 }
 
 void AFPSTimePlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner)
@@ -71,4 +80,19 @@ bool AFPSTimePlayerController::GetbCollectableUIVisible()
 void AFPSTimePlayerController::SetCollectableUIInvisible()
 {
 	bCollectableUIVisible = false;
+}
+
+void AFPSTimePlayerController::PauseGame()
+{
+	UE_LOG(LogTemp, Warning, TEXT("IN PAUSE METHOD"));
+	if (!IsPaused())
+	{
+		UGameplayStatics::SetGamePaused(this, true);
+		UE_LOG(LogTemp, Warning, TEXT("Pausing"));
+	}
+	else
+	{
+		UGameplayStatics::SetGamePaused(this, false);;
+		UE_LOG(LogTemp, Warning, TEXT("UnPausing"));
+	}
 }
