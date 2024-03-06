@@ -17,5 +17,8 @@ class FPSTIME_API ATwoSidesDoorActor : public ADoorActor
 public:
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
+private:
+	UPROPERTY(EditAnywhere)
+	FVector ForwardVector;
 
 };

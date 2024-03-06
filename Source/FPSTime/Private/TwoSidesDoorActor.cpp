@@ -4,6 +4,7 @@
 #include "TwoSidesDoorActor.h"
 #include "FPSTime/PlayerCharacter.h"
 #include "KillForKeysGameMode.h"
+#include "Math/Vector.h"
 
 void ATwoSidesDoorActor::NotifyActorBeginOverlap(AActor* OtherActor)
 {
@@ -14,16 +15,17 @@ void ATwoSidesDoorActor::NotifyActorBeginOverlap(AActor* OtherActor)
 		AKillForKeysGameMode* CurrentGameMode = Cast<AKillForKeysGameMode>(GetWorld()->GetAuthGameMode());
 		if (CurrentGameMode)
 		{
-			FVector RelativePositionWithPlayer = GetActorLocation() - Player->GetActorLocation();
-			if (RelativePositionWithPlayer.X > 0)
+			FVector RelativePositionWithPlayer = Player->GetActorLocation() - GetActorLocation();
+			float DotProduct = FVector::DotProduct(RelativePositionWithPlayer, ForwardVector);
+			if (DotProduct> 0)
 			{
 				bShouldMove = true;
 				
-				PlayerMessage = TEXT("Pass");
+				PlayerMessage = TEXT("You unlocked it.");
 			}
 			else
 			{
-				PlayerMessage = TEXT("Dont Pass");
+				PlayerMessage = TEXT("It´s locked from the other side.");
 			}
 			CurrentGameMode->SetPlayerMessage(PlayerMessage);
 			CurrentGameMode->SetPlayerMessageUIVisibility(true);
