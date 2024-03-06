@@ -21,6 +21,15 @@ protected:
 
 	FString PlayerMessage;
 
+	UPROPERTY(EditAnywhere)
+	USoundBase* LockedSound;
+
+	UPROPERTY(EditAnywhere)
+	USoundBase* UnlockedSound;
+
+	UPROPERTY(EditAnywhere)
+	USoundBase* OpenSound;
+
 public:	
 	virtual void Tick(float DeltaTime) override;
 

@@ -37,6 +37,11 @@ void ACollectable::Tick(float DeltaTime)
 
 void ACollectable::Use(AActor* User)
 {
+	if (CollectSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), CollectSound, GetActorLocation());
+	}
+	
 	APlayerController* Controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	AFPSTimePlayerController* PlayerController = Cast<AFPSTimePlayerController>(Controller);
 	if (PlayerController)

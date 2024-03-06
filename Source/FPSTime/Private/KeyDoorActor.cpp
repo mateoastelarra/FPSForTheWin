@@ -4,6 +4,7 @@
 #include "KeyDoorActor.h"
 #include "FPSTime/PlayerCharacter.h"
 #include "KillForKeysGameMode.h"
+#include "Kismet/GameplayStatics.h"
 
 void AKeyDoorActor::NotifyActorBeginOverlap(AActor* OtherActor)
 {
@@ -22,10 +23,19 @@ void AKeyDoorActor::NotifyActorBeginOverlap(AActor* OtherActor)
 				bShouldMove = true;
 				CurrentGameMode->LoseKeys(KeysNeededToOpen);
 				PlayerMessage = TEXT("You used ") + FString::FromInt(KeysNeededToOpen) + TEXT(" keys.");
+				if (UnlockedSound && OpenSound)
+				{
+					UGameplayStatics::PlaySoundAtLocation(GetWorld(), UnlockedSound, GetActorLocation());
+					UGameplayStatics::PlaySoundAtLocation(GetWorld(), OpenSound, GetActorLocation());
+				}
 			}
 			else if (!bShouldMove)
 			{
 				PlayerMessage = TEXT("You need ") + FString::FromInt(KeysNeededToOpen) + TEXT(" keys to open this door.");
+				if (LockedSound)
+				{
+					UGameplayStatics::PlaySoundAtLocation(GetWorld(), LockedSound, GetActorLocation());
+				}
 			}
 			CurrentGameMode->SetPlayerMessage(PlayerMessage);
 			CurrentGameMode->SetPlayerMessageUIVisibility(true);

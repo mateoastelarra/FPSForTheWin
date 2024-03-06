@@ -30,4 +30,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	FString NameToShowOnScreen;
+
+	UPROPERTY(EditAnywhere)
+	USoundBase* CollectSound;
 };
