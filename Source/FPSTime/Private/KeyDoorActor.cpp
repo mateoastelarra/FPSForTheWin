@@ -23,7 +23,7 @@ void AKeyDoorActor::NotifyActorBeginOverlap(AActor* OtherActor)
 				CurrentGameMode->LoseKeys(KeysNeededToOpen);
 				PlayerMessage = TEXT("You used ") + FString::FromInt(KeysNeededToOpen) + TEXT(" keys.");
 			}
-			else
+			else if (!bShouldMove)
 			{
 				PlayerMessage = TEXT("You need ") + FString::FromInt(KeysNeededToOpen) + TEXT(" keys to open this door.");
 			}
