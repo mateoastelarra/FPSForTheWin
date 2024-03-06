@@ -33,7 +33,10 @@ private:
 	TSubclassOf<UUserWidget> DeadScreenClass;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<UUserWidget> CrossHairClass;
+	TSubclassOf<UUserWidget> HUDClass;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UUserWidget> PauseScreenClass;
 
 	UPROPERTY(EditAnywhere)
 	float RestartDelay = 3.f;
@@ -52,6 +55,8 @@ private:
 
 	bool bCollectableUIVisible = false;
 
+	bool bPauseScreenVisible = false;
+
 	UFUNCTION(BlueprintPure)
 	FString GetCurrentCollectableUIText();
 
@@ -60,6 +65,9 @@ private:
 
 	UFUNCTION(BluePrintPure)
 	bool GetbCollectableUIVisible();
+
+	UFUNCTION(BluePrintPure)
+	bool GetbPauseScreenVisible();
 
 	void SetCollectableUIInvisible();
 

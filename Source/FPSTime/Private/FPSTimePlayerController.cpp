@@ -10,10 +10,16 @@ void AFPSTimePlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	HUD = CreateWidget(this, CrossHairClass);
+	HUD = CreateWidget(this, HUDClass);
 	if (HUD)
 	{
 		HUD->AddToViewport();
+	}
+
+	UUserWidget* PauseScreen = CreateWidget(this, PauseScreenClass);
+	if (PauseScreen)
+	{
+		PauseScreen->AddToViewport();
 	}
 }
 
@@ -84,15 +90,19 @@ void AFPSTimePlayerController::SetCollectableUIInvisible()
 
 void AFPSTimePlayerController::PauseGame()
 {
-	UE_LOG(LogTemp, Warning, TEXT("IN PAUSE METHOD"));
 	if (!IsPaused())
 	{
+		bPauseScreenVisible = true;
 		UGameplayStatics::SetGamePaused(this, true);
-		UE_LOG(LogTemp, Warning, TEXT("Pausing"));
 	}
 	else
 	{
 		UGameplayStatics::SetGamePaused(this, false);;
-		UE_LOG(LogTemp, Warning, TEXT("UnPausing"));
+		bPauseScreenVisible = false;
 	}
+}
+
+bool AFPSTimePlayerController::GetbPauseScreenVisible()
+{
+	return bPauseScreenVisible;
 }
