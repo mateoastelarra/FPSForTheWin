@@ -14,6 +14,9 @@ class FPSTIME_API AKillForKeysGameMode : public AFPSTimeGameModeBase
 {
 	GENERATED_BODY()
 
+protected:
+	virtual void BeginPlay() override;
+
 public:
 	virtual void PawnKilled(APawn* PawnKilled) override;
 

@@ -3,6 +3,13 @@
 
 #include "KillForKeysGameMode.h"
 #include "Blueprint/UserWidget.h"
+#include "Kismet/GameplayStatics.h"
+
+void AKillForKeysGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+}
 
 void AKillForKeysGameMode::PawnKilled(APawn* PawnKilled)
 {

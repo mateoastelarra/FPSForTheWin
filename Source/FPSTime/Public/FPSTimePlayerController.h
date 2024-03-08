@@ -44,6 +44,12 @@ private:
 	UPROPERTY(EditAnywhere)
 	float CollectableUIDelay = 2.f;
 
+	UPROPERTY(EditAnywhere)
+	USoundBase* BackgroundMusic;
+
+	UPROPERTY(EditAnywhere)
+	float BackgroundMusicVolume = 1.f;
+
 	UPROPERTY()
 	UUserWidget* HUD;
 
@@ -56,6 +62,8 @@ private:
 	bool bCollectableUIVisible = false;
 
 	bool bPauseScreenVisible = false;
+
+	UAudioComponent* MusicAudioComponent;
 
 	UFUNCTION(BlueprintPure)
 	FString GetCurrentCollectableUIText();

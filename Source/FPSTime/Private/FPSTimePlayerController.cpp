@@ -5,6 +5,7 @@
 #include "TimerManager.h"
 #include "Blueprint/UserWidget.h"
 #include "Kismet/GameplayStatics.h"
+#include "Components/AudioComponent.h"
 
 void AFPSTimePlayerController::BeginPlay()
 {
@@ -20,6 +21,14 @@ void AFPSTimePlayerController::BeginPlay()
 	if (PauseScreen)
 	{
 		PauseScreen->AddToViewport();
+	}
+
+	if (BackgroundMusic)
+	{
+		MusicAudioComponent = UGameplayStatics::SpawnSound2D(this, 
+															BackgroundMusic, 
+															BackgroundMusicVolume, 
+															1, 0, nullptr, false, true);
 	}
 }
 
@@ -46,6 +55,7 @@ void AFPSTimePlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
 		DeadScreen->AddToViewport();
 	}
 
+	MusicAudioComponent->FadeOut(RestartDelay, 0);
 	GetWorldTimerManager().SetTimer(RestartTimer, this, &APlayerController::RestartLevel, RestartDelay);
 }
 
