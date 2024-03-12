@@ -18,6 +18,7 @@ void AEnemyAIController::BeginPlay()
 		UBlackboardComponent* AIBlackboard = GetBlackboardComponent();
 		if (GetPawn())
 		{
+			UE_LOG(LogTemp, Warning, TEXT("Start Location"));
 			AIBlackboard->SetValueAsVector(TEXT("StartLocation"), GetPawn()->GetActorLocation());
 		}
 		

@@ -40,6 +40,8 @@ void ABaseProjectile::Tick(float DeltaTime)
 
 void ABaseProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
+	if (OtherActor == nullptr) { return; }
+
 	UHealth* HealthComponent = OtherActor->FindComponentByClass<UHealth>();;
 	if (HealthComponent && OtherActor != this)
 	{
