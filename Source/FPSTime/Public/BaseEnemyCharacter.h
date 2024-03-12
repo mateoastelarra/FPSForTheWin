@@ -29,6 +29,11 @@ private:
 	UPROPERTY()
 	AGun* Gun;
 
+	UPROPERTY(EditAnywhere)
+	TArray<TSubclassOf<AActor>> CollectablesToSpawn;
+
+	void SpawnCollectableWhenDead();
+
 public:	
 	UPROPERTY(EditAnywhere)
 	float ChaseRange = 3000.f;

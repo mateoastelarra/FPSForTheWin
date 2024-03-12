@@ -45,9 +45,18 @@ void ABaseEnemyCharacter::Shoot()
 
 void ABaseEnemyCharacter::Destroyed()
 {
+	SpawnCollectableWhenDead();
 	DetachFromControllerPendingDestroy();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	EnemySpawner->RemoveFromSpawnedActors(this);
+	IDestructible* DestructibleActorToRemove = Cast<IDestructible>(this);
+	EnemySpawner->RemoveFromSpawnedActors(DestructibleActorToRemove);
 }
 
+void ABaseEnemyCharacter::SpawnCollectableWhenDead()
+{
+	int CollectableToSpawnIndex = rand() % CollectablesToSpawn.Num();
+	TSubclassOf<AActor> CollectableToSpawn = CollectablesToSpawn[CollectableToSpawnIndex];
+	FVector SpawnLocation = GetActorLocation();
+	GetWorld()->SpawnActor<AActor>(CollectableToSpawn, SpawnLocation, GetActorRotation());
+}

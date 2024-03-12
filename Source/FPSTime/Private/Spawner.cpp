@@ -63,8 +63,11 @@ void ASpawner::SpawnRandomActorInSpawnPoint(int index)
 
 void ASpawner::RemoveFromSpawnedActors(IDestructible* EnemyToRemove)
 {
-	if (EnemyToRemove == nullptr) { return; }
-	SpawnedEnemies.Remove(EnemyToRemove);
+	if (EnemyToRemove)
+	{
+		SpawnedEnemies.Remove(EnemyToRemove);
+	}
+	
 	if (SpawnedEnemies.Num() == 0 && KeyToDrop != nullptr)
 	{
 		TSubclassOf<AActor> ActorToSpawn = KeyToDrop;

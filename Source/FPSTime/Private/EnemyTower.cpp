@@ -115,6 +115,7 @@ void AEnemyTower::Destroyed()
 	{
 		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
 	}
-	EnemySpawner->RemoveFromSpawnedActors(this);	
+	IDestructible* DestructibleActorToRemove = Cast<IDestructible>(this);
+	EnemySpawner->RemoveFromSpawnedActors(DestructibleActorToRemove);
 	Destroy();
 }
