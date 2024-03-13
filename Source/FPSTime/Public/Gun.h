@@ -29,7 +29,7 @@ public:
 
 	int GetCurrentBullets();
 
-	int GetShootingRate();
+	float GetShootingRate();
 
 private:
 	UPROPERTY(VisibleAnywhere)

@@ -106,7 +106,7 @@ int AGun::GetCurrentBullets()
 	return CurrentBullets;
 }
 
-int AGun::GetShootingRate()
+float AGun::GetShootingRate()
 {
 	return ShootingRate;
 }
