@@ -99,3 +99,8 @@ void AGun::AddBullets(int BulletsToAdd)
 {
 	CurrentBullets += BulletsToAdd;
 }
+
+int AGun::GetCurrentBullets()
+{
+	return CurrentBullets;
+}

@@ -43,7 +43,6 @@ public:
 	
 
 private:
-	
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float MovementSpeed = 10.f;
 
@@ -59,7 +58,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	float ChangeWeaponRate = 1.f;
 
-	int CurrentGun = 0;
+	UFUNCTION(BluePrintPure)
+	int GetCurrentGunAmmo();
+
+	int CurrentGunIndex = 0;
 	FTimerHandle ChangeWeaponTimerHandle;
 	float DeltaSeconds;
 

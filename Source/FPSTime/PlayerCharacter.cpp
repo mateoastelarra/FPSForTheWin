@@ -23,12 +23,12 @@ void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CurrentGun = 0;
+	CurrentGunIndex = 0;
 	for (int i = 0; i < GunClasses.Num(); i++)
 	{
 		AddGun(i);
 	}
-	SetGun(CurrentGun);
+	SetGun(CurrentGunIndex);
 }
 
 // Called every frame
@@ -88,7 +88,7 @@ void APlayerCharacter::LookRight(float value)
 
 void APlayerCharacter::Shoot()
 {
-	Guns[CurrentGun]->PullTrigger();
+	Guns[CurrentGunIndex]->PullTrigger();
 }
 
 void APlayerCharacter::SetGun(int GunIndex)
@@ -111,17 +111,17 @@ void APlayerCharacter::ChangeWeapon()
 void APlayerCharacter::ShowWeapon()
 {
 	HideWeapon();
-	CurrentGun = (CurrentGun + 1) % GunClasses.Num();
-	SetGun(CurrentGun);
+	CurrentGunIndex = (CurrentGunIndex + 1) % GunClasses.Num();
+	SetGun(CurrentGunIndex);
 }
 
 void APlayerCharacter::HideWeapon()
 {
 	ShouldHideWeapon = false;
-	if (Guns[CurrentGun])
+	if (Guns[CurrentGunIndex])
 	{
-		Guns[CurrentGun]->SetActorHiddenInGame(true);
-		Guns[CurrentGun]->SetActorEnableCollision(false);
+		Guns[CurrentGunIndex]->SetActorHiddenInGame(true);
+		Guns[CurrentGunIndex]->SetActorEnableCollision(false);
 	}
 }
 
@@ -149,4 +149,9 @@ void APlayerCharacter::Destroyed()
 	}
 	DetachFromControllerPendingDestroy();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
+
+int APlayerCharacter::GetCurrentGunAmmo()
+{
+	return Guns[CurrentGunIndex]->GetCurrentBullets();
 }

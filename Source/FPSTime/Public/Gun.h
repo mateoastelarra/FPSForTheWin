@@ -27,6 +27,8 @@ public:
 
 	void AddBullets(int BulletsToAdd);
 
+	int GetCurrentBullets();
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
