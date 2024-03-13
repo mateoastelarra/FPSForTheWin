@@ -102,7 +102,7 @@ void AEnemyTower::Destroyed()
 {
 	if (WasDestroyed) { return; }
 	WasDestroyed = true;
-
+	
 	if (DeathParticles)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticles, GetActorLocation(), GetActorRotation());
@@ -115,7 +115,5 @@ void AEnemyTower::Destroyed()
 	{
 		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
 	}
-	IDestructible* DestructibleActorToRemove = Cast<IDestructible>(this);
-	EnemySpawner->RemoveFromSpawnedActors(DestructibleActorToRemove);
-	Destroy();
+	EnemySpawner->RemoveFromSpawnedActors(this);
 }

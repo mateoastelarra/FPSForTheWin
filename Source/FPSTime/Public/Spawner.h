@@ -26,6 +26,8 @@ public:
 
 	void RemoveFromSpawnedActors(IDestructible* EnemyToRemove);
 
+	void CheckIfisLastActor();
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;

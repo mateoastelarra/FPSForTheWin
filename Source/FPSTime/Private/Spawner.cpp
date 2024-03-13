@@ -6,7 +6,7 @@
 #include "Components/BoxComponent.h"
 #include "Destructible.h"
 #include "FPSTime/PlayerCharacter.h"
-
+#include "EnemyTower.h"
 
 ASpawner::ASpawner()
 {
@@ -63,11 +63,21 @@ void ASpawner::SpawnRandomActorInSpawnPoint(int index)
 
 void ASpawner::RemoveFromSpawnedActors(IDestructible* EnemyToRemove)
 {
-	if (EnemyToRemove)
+	if (EnemyToRemove && SpawnedEnemies.Num() > 0)
 	{
 		SpawnedEnemies.Remove(EnemyToRemove);
+		AEnemyTower* EnemyTower = Cast<AEnemyTower>(EnemyToRemove);
+		if (EnemyTower)
+		{
+			EnemyTower->Destroy();
+		}
 	}
 	
+	CheckIfisLastActor();
+}
+
+void ASpawner::CheckIfisLastActor()
+{
 	if (SpawnedEnemies.Num() == 0 && KeyToDrop != nullptr)
 	{
 		TSubclassOf<AActor> ActorToSpawn = KeyToDrop;

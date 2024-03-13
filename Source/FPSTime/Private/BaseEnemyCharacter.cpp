@@ -49,8 +49,7 @@ void ABaseEnemyCharacter::Destroyed()
 	DetachFromControllerPendingDestroy();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	IDestructible* DestructibleActorToRemove = Cast<IDestructible>(this);
-	EnemySpawner->RemoveFromSpawnedActors(DestructibleActorToRemove);
+	EnemySpawner->RemoveFromSpawnedActors(this);
 }
 
 void ABaseEnemyCharacter::SpawnCollectableWhenDead()
