@@ -29,6 +29,8 @@ public:
 
 	int GetCurrentBullets();
 
+	int GetShootingRate();
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
@@ -49,6 +51,12 @@ private:
 	USoundBase* HitSound;
 
 	UPROPERTY(EditAnywhere)
+	UTexture2D* ImageWeaponBody;
+
+	UPROPERTY(EditAnywhere)
+	UTexture2D* ImageWeaponMagazine;
+
+	UPROPERTY(EditAnywhere)
 	float MaxRange = 1000.f;
 
 	UPROPERTY(EditAnywhere)
@@ -56,6 +64,18 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	int StartingBullets = 10;
+
+	UPROPERTY(EditAnywhere)
+	float ShootingRate = 1000;
+
+	UFUNCTION(BluePrintPure)
+	UTexture2D* GetImageWeaponBody();
+
+	UFUNCTION(BluePrintPure)
+	UTexture2D* GetImageWeaponMagazine();
+
+	UFUNCTION(BluePrintPure)
+	int GetCurrentGunAmmo();
 
 	int CurrentBullets;
 

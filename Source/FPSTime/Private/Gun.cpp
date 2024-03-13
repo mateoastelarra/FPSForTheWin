@@ -8,6 +8,7 @@
 #include "Health.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "FPSTime/PlayerCharacter.h"
+#include "Engine/Texture2D.h"
 
 // Sets default values
 AGun::AGun()
@@ -101,6 +102,26 @@ void AGun::AddBullets(int BulletsToAdd)
 }
 
 int AGun::GetCurrentBullets()
+{
+	return CurrentBullets;
+}
+
+int AGun::GetShootingRate()
+{
+	return ShootingRate;
+}
+
+UTexture2D* AGun::GetImageWeaponBody()
+{
+	return ImageWeaponBody;
+}
+
+UTexture2D* AGun::GetImageWeaponMagazine()
+{
+	return ImageWeaponMagazine;
+}
+
+int AGun::GetCurrentGunAmmo()
 {
 	return CurrentBullets;
 }

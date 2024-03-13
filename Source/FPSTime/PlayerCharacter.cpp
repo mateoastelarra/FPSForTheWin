@@ -60,7 +60,8 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &APlayerCharacter::MoveRight);
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APlayerCharacter::LookUp);
 	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APlayerCharacter::LookRight);
-	PlayerInputComponent->BindAction(TEXT("Shoot"), IE_Pressed, this, &APlayerCharacter::Shoot);
+	PlayerInputComponent->BindAction(TEXT("StartShooting"), IE_Pressed, this, &APlayerCharacter::StartShooting);
+	PlayerInputComponent->BindAction(TEXT("StopShooting"), IE_Released, this, &APlayerCharacter::StopShooting);
 	PlayerInputComponent->BindAction(TEXT("ChangeWeapon"), IE_Pressed, this, &APlayerCharacter::ChangeWeapon);
 }
 
@@ -86,9 +87,27 @@ void APlayerCharacter::LookRight(float value)
 	AddControllerYawInput(LookSpeed * value * DeltaSeconds);
 }
 
-void APlayerCharacter::Shoot()
+void APlayerCharacter::StartShooting()
 {
-	Guns[CurrentGunIndex]->PullTrigger();
+	UE_LOG(LogTemp, Warning, TEXT("Shooting"));
+	bIsShooting = true;
+	ShootingRate = Guns[CurrentGunIndex]->GetShootingRate();
+	GetWorldTimerManager().SetTimer(ShootingTimerHandle, this, &APlayerCharacter::Fire, ShootingRate, true, 0);
+}
+
+void APlayerCharacter::StopShooting()
+{
+	UE_LOG(LogTemp, Warning, TEXT("NotShooting"));
+	bIsShooting = false;
+	GetWorldTimerManager().ClearTimer(ShootingTimerHandle);
+}
+
+void APlayerCharacter::Fire()
+{
+	if (bIsShooting)
+	{
+		Guns[CurrentGunIndex]->PullTrigger();
+	}
 }
 
 void APlayerCharacter::SetGun(int GunIndex)
@@ -149,6 +168,11 @@ void APlayerCharacter::Destroyed()
 	}
 	DetachFromControllerPendingDestroy();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
+
+AGun* APlayerCharacter::GetCurrentGun()
+{
+	return Guns[CurrentGunIndex];
 }
 
 int APlayerCharacter::GetCurrentGunAmmo()

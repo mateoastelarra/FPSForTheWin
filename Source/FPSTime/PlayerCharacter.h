@@ -59,11 +59,17 @@ private:
 	float ChangeWeaponRate = 1.f;
 
 	UFUNCTION(BluePrintPure)
+	AGun* GetCurrentGun();
+
+	UFUNCTION(BluePrintPure)
 	int GetCurrentGunAmmo();
 
 	int CurrentGunIndex = 0;
 	FTimerHandle ChangeWeaponTimerHandle;
 	float DeltaSeconds;
+	bool bIsShooting;
+	float ShootingRate;
+	FTimerHandle ShootingTimerHandle;
 
 	void MoveForward(float value);
 	void MoveRight(float value);
@@ -75,5 +81,8 @@ private:
 	void ChangeWeapon();
 	void HideWeapon();
 	void ShowWeapon();
-	void Shoot();
+	void Fire();
+	void StartShooting();
+	void StopShooting();
+	
 };
