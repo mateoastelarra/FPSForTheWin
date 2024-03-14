@@ -89,7 +89,6 @@ void APlayerCharacter::LookRight(float value)
 
 void APlayerCharacter::StartShooting()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Shooting"));
 	bIsShooting = true;
 	ShootingRate = Guns[CurrentGunIndex]->GetShootingRate();
 	GetWorldTimerManager().SetTimer(ShootingTimerHandle, this, &APlayerCharacter::Fire, ShootingRate, true, 0);
@@ -97,7 +96,6 @@ void APlayerCharacter::StartShooting()
 
 void APlayerCharacter::StopShooting()
 {
-	UE_LOG(LogTemp, Warning, TEXT("NotShooting"));
 	bIsShooting = false;
 	GetWorldTimerManager().ClearTimer(ShootingTimerHandle);
 }

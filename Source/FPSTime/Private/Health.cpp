@@ -6,9 +6,7 @@
 
 UHealth::UHealth()
 {
-	PrimaryComponentTick.bCanEverTick = true;
-
-	
+	PrimaryComponentTick.bCanEverTick = true;	
 }
 
 void UHealth::BeginPlay()

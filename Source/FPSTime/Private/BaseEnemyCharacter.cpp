@@ -5,6 +5,7 @@
 #include "Gun.h"
 #include "Components/CapsuleComponent.h"
 #include "Spawner.h"
+#include "Destructible.h"
 
 // Sets default values
 ABaseEnemyCharacter::ABaseEnemyCharacter()
@@ -45,11 +46,16 @@ void ABaseEnemyCharacter::Shoot()
 
 void ABaseEnemyCharacter::Destroyed()
 {
+	if (EnemySpawner)
+	{
+		IDestructible* DestructibleActor = Cast<IDestructible>(this);
+		EnemySpawner->RemoveFromSpawnedActors(DestructibleActor);
+	}
+
 	SpawnCollectableWhenDead();
 	DetachFromControllerPendingDestroy();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	EnemySpawner->RemoveFromSpawnedActors(this);
 }
 
 void ABaseEnemyCharacter::SpawnCollectableWhenDead()

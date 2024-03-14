@@ -71,8 +71,7 @@ void ASpawner::RemoveFromSpawnedActors(IDestructible* EnemyToRemove)
 		{
 			EnemyTower->Destroy();
 		}
-	}
-	
+	}	
 	CheckIfisLastActor();
 }
 
