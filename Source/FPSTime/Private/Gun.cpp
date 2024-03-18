@@ -87,12 +87,10 @@ bool AGun::GunTrace(FHitResult& Hit, FVector& ShotDirection)
 	bool bHit;
 	if (Cast<APlayerCharacter>(OwnerPawn))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Shooting"));
 		bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Enemy Shooting"));
 		bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECollisionChannel::ECC_GameTraceChannel2);
 	}
 	return bHit;

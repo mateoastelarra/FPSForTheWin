@@ -15,20 +15,12 @@ class FPSTIME_API ABaseEnemyCharacter : public ACharacter, public IDestructible
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	ABaseEnemyCharacter();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<AGun> GunClass;
-
-	UPROPERTY()
-	AGun* Gun;
-
 	UPROPERTY(EditAnywhere)
 	TArray<TSubclassOf<AActor>> CollectablesToSpawn;
 
@@ -42,7 +34,7 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void Shoot();
+	virtual void Attack();
 
 	virtual void Destroyed() override;
 
