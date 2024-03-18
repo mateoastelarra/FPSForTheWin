@@ -16,4 +16,5 @@ class FPSTIME_API AMutantEnemyCharacter : public ABaseEnemyCharacter
 
 public:
 	virtual void Attack() override;
+	void Intimidate();
 };

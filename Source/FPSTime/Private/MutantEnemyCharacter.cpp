@@ -8,3 +8,7 @@ void AMutantEnemyCharacter::Attack()
 	Super::Attack();
 	UE_LOG(LogTemp, Warning, TEXT("ARRGHH"));
 }
+
+void AMutantEnemyCharacter::Intimidate()
+{
+}
