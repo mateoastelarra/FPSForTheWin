@@ -1,2 +1,8 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Set C++ as language for .cs files
+*.cpp linguist-language=C++
+
+# Exclude all files with .shader extension from ShaderLab detection
+*.shader linguist-detectable=false
