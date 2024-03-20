@@ -6,3 +6,6 @@
 
 # Exclude all files with .shader extension from ShaderLab detection
 *.shader linguist-detectable=false
+
+# Exclude html detection
+*.html linguist-language=ignore
