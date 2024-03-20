@@ -2,13 +2,50 @@
 
 
 #include "MutantEnemyCharacter.h"
+#include "Components/BoxComponent.h"
+#include "FPSTime/PlayerCharacter.h"
+#include "Health.h"
+
+AMutantEnemyCharacter::AMutantEnemyCharacter()
+{
+	AttackTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("Trigger"));
+	AttackTrigger->SetupAttachment(RootComponent);
+}
+
+void AMutantEnemyCharacter::NotifyActorBeginOverlap(AActor* OtherActor)
+{
+	Player = Cast<APlayerCharacter>(OtherActor);
+	if (Player)
+	{
+		bPlayerInAttackRange = true;
+	}
+}
+
+void AMutantEnemyCharacter::NotifyActorEndOverlap(AActor* OtherActor)
+{
+	Player = Cast<APlayerCharacter>(OtherActor);
+	if (Player)
+	{
+		bPlayerInAttackRange = false;
+		Player = nullptr;
+	}
+}
 
 void AMutantEnemyCharacter::Attack()
 {
-	Super::Attack();
-	UE_LOG(LogTemp, Warning, TEXT("ARRGHH"));
+	if (bPlayerInAttackRange && Player)
+	{
+		Super::Attack();
+		UE_LOG(LogTemp, Warning, TEXT("ARRGHH"));
+		UHealth* PlayerHealthComponent = Player->FindComponentByClass<UHealth>();
+		if (PlayerHealthComponent)
+		{
+			PlayerHealthComponent->TakeDamage(Damage);
+		}
+	}	
 }
 
 void AMutantEnemyCharacter::Intimidate()
 {
+	UE_LOG(LogTemp, Warning, TEXT("I´m a big and scary motherfucker"));
 }

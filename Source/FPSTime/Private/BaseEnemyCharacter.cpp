@@ -11,7 +11,6 @@ ABaseEnemyCharacter::ABaseEnemyCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-// Called when the game starts or when spawned
 void ABaseEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();

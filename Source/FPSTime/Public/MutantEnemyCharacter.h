@@ -15,6 +15,22 @@ class FPSTIME_API AMutantEnemyCharacter : public ABaseEnemyCharacter
 	GENERATED_BODY()
 
 public:
+	AMutantEnemyCharacter();
+
+	void NotifyActorBeginOverlap(AActor* OtherActor) override;
+	void NotifyActorEndOverlap(AActor* OtherActor) override;
+
 	virtual void Attack() override;
 	void Intimidate();
+
+private:
+	UPROPERTY(VisibleAnywhere)
+	class UBoxComponent* AttackTrigger;
+
+	UPROPERTY(EditAnywhere)
+	float Damage;
+
+	class APlayerCharacter* Player;
+
+	bool bPlayerInAttackRange;
 };
