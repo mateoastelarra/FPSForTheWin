@@ -5,6 +5,7 @@
 #include "Components/BoxComponent.h"
 #include "FPSTime/PlayerCharacter.h"
 #include "Health.h"
+#include "Animation/AnimInstance.h"
 
 AMutantEnemyCharacter::AMutantEnemyCharacter()
 {
@@ -36,7 +37,15 @@ void AMutantEnemyCharacter::Attack()
 	if (bPlayerInAttackRange && Player)
 	{
 		Super::Attack();
+
 		UE_LOG(LogTemp, Warning, TEXT("ARRGHH"));
+		UAnimInstance* MutantAnimInstance = GetMesh()->GetAnimInstance();
+		if (MutantAnimInstance && AttackAnimMontage)
+		{
+			MutantAnimInstance->Montage_Play(AttackAnimMontage);
+			UE_LOG(LogTemp, Warning, TEXT("Animatrix:"));
+		}
+		
 		UHealth* PlayerHealthComponent = Player->FindComponentByClass<UHealth>();
 		if (PlayerHealthComponent)
 		{

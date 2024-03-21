@@ -28,6 +28,9 @@ private:
 	class UBoxComponent* AttackTrigger;
 
 	UPROPERTY(EditAnywhere)
+	class UAnimMontage* AttackAnimMontage;
+
+	UPROPERTY(EditAnywhere)
 	float Damage;
 
 	class APlayerCharacter* Player;
