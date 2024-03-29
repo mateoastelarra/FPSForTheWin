@@ -33,4 +33,14 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	USoundBase* CollectSound;
+
+	UPROPERTY(EditAnywhere)
+	FRotator RotationAmount;
+
+	UPROPERTY(EditAnywhere)
+	float RotationDelay;
+
+	FTimerHandle Timer;
+
+	void RotationTimer();
 };

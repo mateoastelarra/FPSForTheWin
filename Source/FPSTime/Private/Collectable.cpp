@@ -26,6 +26,8 @@ void ACollectable::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	GetWorldTimerManager().SetTimer(Timer, this, &ACollectable::RotationTimer,
+		RotationDelay, true);
 }
 
 // Called every frame
@@ -49,5 +51,10 @@ void ACollectable::Use(AActor* User)
 		PlayerController->SetCollectableName(NameToShowOnScreen);
 		PlayerController->SetCollectableUIVisible();
 	}
+}
+
+void ACollectable::RotationTimer()
+{
+	AddActorLocalRotation(RotationAmount, true);
 }
 
