@@ -7,7 +7,7 @@
 void AHealthCollectable::Use(AActor* User)
 {
 	Super::Use(User);
-
+	UE_LOG(LogTemp, Warning, TEXT("Health baby"));
 	APlayerCharacter* Player = Cast<APlayerCharacter>(User);
 	if (Player)
 	{
