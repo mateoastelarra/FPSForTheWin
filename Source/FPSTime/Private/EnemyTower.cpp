@@ -43,7 +43,7 @@ void AEnemyTower::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (InFireRange())
+	if (!WasDestroyed && InFireRange())
 	{
 		RotateTurret(Player->GetActorLocation());
 	}
@@ -79,7 +79,7 @@ void AEnemyTower::Fire()
 
 void AEnemyTower::CheckFireCondition()
 {
-	if (Player && InFireRange())
+	if (!WasDestroyed && Player && InFireRange())
 	{
 		Fire();
 	}
@@ -115,5 +115,13 @@ void AEnemyTower::Destroyed()
 	{
 		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
 	}
-	EnemySpawner->RemoveFromSpawnedActors(this);
+	if (EnemySpawner)
+	{
+		EnemySpawner->RemoveFromSpawnedActors(this);
+	}
+	TurretMesh->DestroyComponent();
+	if (SmokeParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, SmokeParticles, GetActorLocation(), GetActorRotation());
+	}
 }

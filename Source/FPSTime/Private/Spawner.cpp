@@ -66,11 +66,6 @@ void ASpawner::RemoveFromSpawnedActors(IDestructible* EnemyToRemove)
 	if (EnemyToRemove && SpawnedEnemies.Num() > 0)
 	{
 		SpawnedEnemies.Remove(EnemyToRemove);
-		AEnemyTower* EnemyTower = Cast<AEnemyTower>(EnemyToRemove);
-		if (EnemyTower)
-		{
-			EnemyTower->Destroy();
-		}
 	}	
 	CheckIfisLastActor();
 }
