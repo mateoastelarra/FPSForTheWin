@@ -43,7 +43,6 @@ void AMutantEnemyCharacter::Attack()
 		if (MutantAnimInstance && AttackAnimMontage)
 		{
 			MutantAnimInstance->Montage_Play(AttackAnimMontage);
-			UE_LOG(LogTemp, Warning, TEXT("Animatrix:"));
 		}
 		
 		UHealth* PlayerHealthComponent = Player->FindComponentByClass<UHealth>();

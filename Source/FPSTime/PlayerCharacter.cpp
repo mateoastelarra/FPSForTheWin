@@ -8,6 +8,7 @@
 #include "Gun.h"
 #include "FPSTimeGameModeBase.h"
 #include "Components/CapsuleComponent.h"
+#include "Animation/AnimInstance.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -104,6 +105,13 @@ void APlayerCharacter::Fire()
 {
 	if (bIsShooting)
 	{
+		UAnimInstance* PlayerAnimInstance = GetMesh()->GetAnimInstance();
+		if (PlayerAnimInstance && ShootAnimMontages[CurrentGunIndex])
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Before playing montage: %d"), CurrentGunIndex);
+			PlayerAnimInstance->Montage_Play(ShootAnimMontages[CurrentGunIndex]);
+			UE_LOG(LogTemp, Warning, TEXT("After playing montage"));
+		}
 		Guns[CurrentGunIndex]->PullTrigger();
 	}
 }
@@ -164,6 +172,9 @@ void APlayerCharacter::Destroyed()
 	{
 		GameMode->PawnKilled(this);
 	}
+	HideWeapon();
+	StopShooting();
+	GetMesh()->DestroyComponent();
 	DetachFromControllerPendingDestroy();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }

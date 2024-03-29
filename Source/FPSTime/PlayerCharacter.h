@@ -64,6 +64,9 @@ private:
 	UFUNCTION(BluePrintPure)
 	int GetCurrentGunAmmo();
 
+	UPROPERTY(EditAnywhere)
+	TArray<class UAnimMontage*> ShootAnimMontages;
+
 	int CurrentGunIndex = 0;
 	FTimerHandle ChangeWeaponTimerHandle;
 	float DeltaSeconds;
