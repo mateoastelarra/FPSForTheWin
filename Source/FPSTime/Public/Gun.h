@@ -29,7 +29,11 @@ public:
 
 	int GetCurrentBullets();
 
+	int GetRemainingAmmo();
+
 	float GetShootingRate();
+
+	void Reload();
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -66,6 +70,9 @@ private:
 	int StartingBullets = 10;
 
 	UPROPERTY(EditAnywhere)
+	int BulletsCapacity = 10;
+
+	UPROPERTY(EditAnywhere)
 	float ShootingRate = 1000;
 
 	UFUNCTION(BluePrintPure)
@@ -77,7 +84,9 @@ private:
 	UFUNCTION(BluePrintPure)
 	int GetCurrentGunAmmo();
 
-	int CurrentBullets;
+	int CurrentLoadedBullets;
+
+	int RemainingBullets;
 
 	bool GunTrace(FHitResult& Hit, FVector& ShotDirection);
 };

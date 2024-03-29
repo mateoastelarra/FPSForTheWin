@@ -188,3 +188,8 @@ int APlayerCharacter::GetCurrentGunAmmo()
 {
 	return Guns[CurrentGunIndex]->GetCurrentBullets();
 }
+
+int APlayerCharacter::GetRemainingGunAmmo()
+{
+	return Guns[CurrentGunIndex]->GetRemainingAmmo();
+}

@@ -64,6 +64,9 @@ private:
 	UFUNCTION(BluePrintPure)
 	int GetCurrentGunAmmo();
 
+	UFUNCTION(BluePrintPure)
+	int GetRemainingGunAmmo();
+
 	UPROPERTY(EditAnywhere)
 	TArray<class UAnimMontage*> ShootAnimMontages;
 

@@ -28,7 +28,8 @@ void AGun::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	CurrentBullets = StartingBullets;
+	CurrentLoadedBullets = FMath::Min(StartingBullets, BulletsCapacity);
+	RemainingBullets = FMath::Max(0, StartingBullets - BulletsCapacity);
 }
 
 // Called every frame
@@ -40,11 +41,11 @@ void AGun::Tick(float DeltaTime)
 
 void AGun::PullTrigger()
 {
-	if (CurrentBullets <= 0) { return; }
+	if (CurrentLoadedBullets <= 0) { return; }
 
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("SOCKET_MuzzleFlash"));
 	UGameplayStatics::SpawnSoundAttached(FireSound, Mesh, TEXT("SOCKET_MuzzleFlash"));
-	CurrentBullets--;
+	CurrentLoadedBullets--;
 
 	FVector ShotDirection;
 	FHitResult OutHit;
@@ -98,17 +99,32 @@ bool AGun::GunTrace(FHitResult& Hit, FVector& ShotDirection)
 
 void AGun::AddBullets(int BulletsToAdd)
 {
-	CurrentBullets += BulletsToAdd;
+	CurrentLoadedBullets += BulletsToAdd;
 }
 
 int AGun::GetCurrentBullets()
 {
-	return CurrentBullets;
+	return CurrentLoadedBullets;
 }
 
 float AGun::GetShootingRate()
 {
 	return ShootingRate;
+}
+
+int AGun::GetCurrentGunAmmo()
+{
+	return CurrentLoadedBullets;
+}
+
+int AGun::GetRemainingAmmo()
+{
+	return RemainingBullets;
+}
+
+void AGun::Reload()
+{
+	CurrentLoadedBullets = FMath::Max(BulletsCapacity, RemainingBullets);
 }
 
 UTexture2D* AGun::GetImageWeaponBody()
@@ -119,9 +135,4 @@ UTexture2D* AGun::GetImageWeaponBody()
 UTexture2D* AGun::GetImageWeaponMagazine()
 {
 	return ImageWeaponMagazine;
-}
-
-int AGun::GetCurrentGunAmmo()
-{
-	return CurrentBullets;
 }
