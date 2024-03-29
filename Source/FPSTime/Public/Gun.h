@@ -52,7 +52,13 @@ private:
 	USoundBase* FireSound;
 
 	UPROPERTY(EditAnywhere)
+	USoundBase* EmptySound;
+
+	UPROPERTY(EditAnywhere)
 	USoundBase* HitSound;
+
+	UPROPERTY(EditAnywhere)
+	USoundBase* ReloadSound;
 
 	UPROPERTY(EditAnywhere)
 	UTexture2D* ImageWeaponBody;

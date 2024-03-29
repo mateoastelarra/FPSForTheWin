@@ -64,6 +64,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAction(TEXT("StartShooting"), IE_Pressed, this, &APlayerCharacter::StartShooting);
 	PlayerInputComponent->BindAction(TEXT("StopShooting"), IE_Released, this, &APlayerCharacter::StopShooting);
 	PlayerInputComponent->BindAction(TEXT("ChangeWeapon"), IE_Pressed, this, &APlayerCharacter::ChangeWeapon);
+	PlayerInputComponent->BindAction(TEXT("Reload"), IE_Pressed, this, &APlayerCharacter::Reload);
 }
 
 void APlayerCharacter::MoveForward(float value)
@@ -103,6 +104,13 @@ void APlayerCharacter::StopShooting()
 
 void APlayerCharacter::Fire()
 {
+	if (GetCurrentGunAmmo() <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("NO BULLETS"));
+		Guns[CurrentGunIndex]->PullTrigger();
+		StopShooting();
+		return;
+	}
 	if (bIsShooting)
 	{
 		UAnimInstance* PlayerAnimInstance = GetMesh()->GetAnimInstance();
@@ -114,6 +122,11 @@ void APlayerCharacter::Fire()
 		}
 		Guns[CurrentGunIndex]->PullTrigger();
 	}
+}
+
+void APlayerCharacter::Reload()
+{
+	Guns[CurrentGunIndex]->Reload();
 }
 
 void APlayerCharacter::SetGun(int GunIndex)
@@ -172,8 +185,8 @@ void APlayerCharacter::Destroyed()
 	{
 		GameMode->PawnKilled(this);
 	}
-	HideWeapon();
 	StopShooting();
+	HideWeapon();
 	GetMesh()->DestroyComponent();
 	DetachFromControllerPendingDestroy();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);

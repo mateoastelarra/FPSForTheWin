@@ -90,5 +90,6 @@ private:
 	void Fire();
 	void StartShooting();
 	void StopShooting();
+	void Reload();
 	
 };

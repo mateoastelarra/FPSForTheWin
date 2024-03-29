@@ -41,7 +41,11 @@ void AGun::Tick(float DeltaTime)
 
 void AGun::PullTrigger()
 {
-	if (CurrentLoadedBullets <= 0) { return; }
+	if (CurrentLoadedBullets <= 0) 
+	{ 
+		UGameplayStatics::SpawnSoundAttached(EmptySound, Mesh, TEXT("SOCKET_MuzzleFlash"));
+		return; 
+	}
 
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("SOCKET_MuzzleFlash"));
 	UGameplayStatics::SpawnSoundAttached(FireSound, Mesh, TEXT("SOCKET_MuzzleFlash"));
@@ -124,7 +128,10 @@ int AGun::GetRemainingAmmo()
 
 void AGun::Reload()
 {
-	CurrentLoadedBullets = FMath::Max(BulletsCapacity, RemainingBullets);
+	UGameplayStatics::SpawnSoundAttached(ReloadSound, Mesh, TEXT("SOCKET_MuzzleFlash"));
+	int BulletsToAdd = FMath::Min(BulletsCapacity - CurrentLoadedBullets, RemainingBullets);
+	CurrentLoadedBullets += BulletsToAdd;
+	RemainingBullets -= BulletsToAdd;
 }
 
 UTexture2D* AGun::GetImageWeaponBody()
