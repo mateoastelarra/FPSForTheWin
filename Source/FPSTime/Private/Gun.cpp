@@ -103,7 +103,7 @@ bool AGun::GunTrace(FHitResult& Hit, FVector& ShotDirection)
 
 void AGun::AddBullets(int BulletsToAdd)
 {
-	CurrentLoadedBullets += BulletsToAdd;
+	RemainingBullets += BulletsToAdd;
 }
 
 int AGun::GetCurrentBullets()
