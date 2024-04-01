@@ -71,7 +71,7 @@ private:
 	TArray<class UAnimMontage*> ShootAnimMontages;
 
 	UPROPERTY(EditAnywhere)
-	class UAnimMontage* ReloadAnimMontage;
+	TArray<class UAnimMontage*> ReloadAnimMontages;
 
 	int CurrentGunIndex = 0;
 	FTimerHandle ChangeWeaponTimerHandle;
