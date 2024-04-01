@@ -38,7 +38,6 @@ void AMutantEnemyCharacter::Attack()
 	{
 		Super::Attack();
 
-		UE_LOG(LogTemp, Warning, TEXT("ARRGHH"));
 		UAnimInstance* MutantAnimInstance = GetMesh()->GetAnimInstance();
 		if (MutantAnimInstance && AttackAnimMontage)
 		{

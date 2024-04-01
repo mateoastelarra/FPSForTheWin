@@ -127,6 +127,11 @@ void APlayerCharacter::Fire()
 void APlayerCharacter::Reload()
 {
 	Guns[CurrentGunIndex]->Reload();
+	UAnimInstance* PlayerAnimInstance = GetMesh()->GetAnimInstance();
+	if (PlayerAnimInstance && ReloadAnimMontage)
+	{
+		PlayerAnimInstance->Montage_Play(ReloadAnimMontage);
+	}
 }
 
 void APlayerCharacter::SetGun(int GunIndex)
@@ -187,7 +192,7 @@ void APlayerCharacter::Destroyed()
 	}
 	StopShooting();
 	HideWeapon();
-	GetMesh()->DestroyComponent();
+	//GetMesh()->DestroyComponent();
 	DetachFromControllerPendingDestroy();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }

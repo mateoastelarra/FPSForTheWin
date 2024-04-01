@@ -70,6 +70,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	TArray<class UAnimMontage*> ShootAnimMontages;
 
+	UPROPERTY(EditAnywhere)
+	class UAnimMontage* ReloadAnimMontage;
+
 	int CurrentGunIndex = 0;
 	FTimerHandle ChangeWeaponTimerHandle;
 	float DeltaSeconds;
