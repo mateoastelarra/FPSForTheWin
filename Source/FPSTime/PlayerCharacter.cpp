@@ -116,9 +116,7 @@ void APlayerCharacter::Fire()
 		UAnimInstance* PlayerAnimInstance = GetMesh()->GetAnimInstance();
 		if (PlayerAnimInstance && ShootAnimMontages[CurrentGunIndex])
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Before playing montage: %d"), CurrentGunIndex);
 			PlayerAnimInstance->Montage_Play(ShootAnimMontages[CurrentGunIndex]);
-			UE_LOG(LogTemp, Warning, TEXT("After playing montage"));
 		}
 		Guns[CurrentGunIndex]->PullTrigger();
 	}
@@ -141,7 +139,7 @@ void APlayerCharacter::SetGun(int GunIndex)
 		Guns[GunIndex]->SetActorHiddenInGame(false);
 		Guns[GunIndex]->SetActorEnableCollision(true);
 	}
-	Guns[GunIndex]->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("SOCKET_Weapon_L"));
+	Guns[GunIndex]->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("SOCKET_Weapon_R"));
 	Guns[GunIndex]->SetOwner(this);
 }
 
