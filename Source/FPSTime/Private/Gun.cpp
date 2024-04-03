@@ -9,6 +9,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "FPSTime/PlayerCharacter.h"
 #include "Engine/Texture2D.h"
+#include "Components/StaticMeshComponent.h"
 
 // Sets default values
 AGun::AGun()
@@ -132,6 +133,11 @@ void AGun::Reload()
 	int BulletsToAdd = FMath::Min(BulletsCapacity - CurrentLoadedBullets, RemainingBullets);
 	CurrentLoadedBullets += BulletsToAdd;
 	RemainingBullets -= BulletsToAdd;
+}
+
+UStaticMeshComponent* AGun::GetClipMesh()
+{
+	return Clip;
 }
 
 UTexture2D* AGun::GetImageWeaponBody()
