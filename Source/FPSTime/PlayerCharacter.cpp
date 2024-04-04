@@ -126,8 +126,11 @@ void APlayerCharacter::Reload()
 {
 	AGun* CurrentGun = Guns[CurrentGunIndex];
 	CurrentGun->Reload();
-	UStaticMeshComponent* ClipMesh = CurrentGun->GetClipMesh();
-	ClipMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("SOCKET_Weapon_L"));
+	AActor* Clip = CurrentGun->GetClipMesh();
+	if (Clip)
+	{
+		Clip->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("SOCKET_Weapon_L"));
+	}
 	UAnimInstance* PlayerAnimInstance = GetMesh()->GetAnimInstance();
 	if (PlayerAnimInstance && ReloadAnimMontages[CurrentGunIndex])
 	{

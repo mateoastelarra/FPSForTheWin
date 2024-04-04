@@ -35,7 +35,7 @@ public:
 
 	void Reload();
 
-	UStaticMeshComponent* GetClipMesh();
+	AActor* GetClipMesh();
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -45,7 +45,7 @@ private:
 	USkeletalMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere)
-	class UStaticMeshComponent* Clip;
+	AActor* Clip;
 
 	UPROPERTY(EditAnywhere)
 	UParticleSystem* MuzzleFlash;

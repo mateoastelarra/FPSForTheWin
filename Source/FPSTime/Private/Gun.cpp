@@ -135,7 +135,7 @@ void AGun::Reload()
 	RemainingBullets -= BulletsToAdd;
 }
 
-UStaticMeshComponent* AGun::GetClipMesh()
+AActor* AGun::GetClipMesh()
 {
 	return Clip;
 }
