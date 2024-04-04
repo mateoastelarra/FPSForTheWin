@@ -74,17 +74,19 @@ private:
 	TArray<class UAnimMontage*> ReloadAnimMontages;
 
 	int CurrentGunIndex = 0;
-	FTimerHandle ChangeWeaponTimerHandle;
 	float DeltaSeconds;
 	bool bIsShooting;
 	float ShootingRate;
+	FTimerHandle ChangeWeaponTimerHandle;
 	FTimerHandle ShootingTimerHandle;
 
+	// Player Movement
 	void MoveForward(float value);
 	void MoveRight(float value);
 	void LookUp(float value);
 	void LookRight(float value);
 
+	// Gun
 	void SetGun(int GunIndex);
 	void AddGun(int GunIndex);
 	void ChangeWeapon();
