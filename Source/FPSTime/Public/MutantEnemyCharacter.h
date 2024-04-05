@@ -36,6 +36,15 @@ private:
 	UFUNCTION(BluePrintCallable)
 		void MakeDamage();
 
+	UPROPERTY(EditAnywhere, Category = "Audio")
+		USoundBase* GrowlSound;
+
+	UPROPERTY(EditAnywhere, Category = "Audio")
+		USoundBase* HitSound;
+
+	UPROPERTY(EditAnywhere, Category = "Audio")
+		USoundBase* MissSound;
+
 	class APlayerCharacter* Player;
 
 	bool bPlayerInAttackRange;
