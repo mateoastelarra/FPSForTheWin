@@ -59,8 +59,10 @@ void AFPSTimePlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
 	{
 		DeadScreen->AddToViewport();
 	}
-
-	MusicAudioComponent->FadeOut(RestartDelay, 0);
+	if (MusicAudioComponent)
+	{
+		MusicAudioComponent->FadeOut(RestartDelay, 0);
+	}
 	GetWorldTimerManager().SetTimer(RestartTimer, this, &APlayerController::RestartLevel, RestartDelay);
 }
 

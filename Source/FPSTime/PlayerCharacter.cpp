@@ -194,11 +194,11 @@ void APlayerCharacter::Destroyed()
 	{
 		GameMode->PawnKilled(this);
 	}
-	StopShooting();
-	HideWeapon();
-	GetMesh()->DestroyComponent();
-	DetachFromControllerPendingDestroy();
-	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	//StopShooting();
+	//HideWeapon();
+	//GetMesh()->DestroyComponent();
+	//DetachFromControllerPendingDestroy();
+	//GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 AGun* APlayerCharacter::GetCurrentGun()
