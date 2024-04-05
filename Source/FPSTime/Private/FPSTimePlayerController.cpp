@@ -11,6 +11,11 @@ void AFPSTimePlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	FString CurrentLevelName = GetWorld()->GetMapName();
+
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *CurrentLevelName);
+
+	if (CurrentLevelName != "UEDPIE_0_Map1") { return; }
 	HUD = CreateWidget(this, HUDClass);
 	if (HUD)
 	{
