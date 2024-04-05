@@ -30,28 +30,31 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<UUserWidget> DeadScreenClass;
+		TSubclassOf<UUserWidget> DeadScreenClass;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<UUserWidget> HUDClass;
+		TSubclassOf<UUserWidget> HUDClass;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<UUserWidget> PauseScreenClass;
+		TSubclassOf<UUserWidget> PauseScreenClass;
 
 	UPROPERTY(EditAnywhere)
-	float RestartDelay = 3.f;
+		float RestartDelay = 3.f;
 
 	UPROPERTY(EditAnywhere)
-	float CollectableUIDelay = 2.f;
+		float CollectableUIDelay = 2.f;
+
+	UPROPERTY(EditAnywhere, Category = "Audio")
+		USoundBase* BackgroundMusic;
+
+	UPROPERTY(EditAnywhere, Category = "Audio")
+		USoundBase* MainMenuMusic;
 
 	UPROPERTY(EditAnywhere)
-	USoundBase* BackgroundMusic;
-
-	UPROPERTY(EditAnywhere)
-	float BackgroundMusicVolume = 1.f;
+		float BackgroundMusicVolume = 1.f;
 
 	UPROPERTY()
-	UUserWidget* HUD;
+		UUserWidget* HUD;
 
 	FTimerHandle RestartTimer;
 
