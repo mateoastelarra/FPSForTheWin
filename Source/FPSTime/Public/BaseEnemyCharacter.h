@@ -28,7 +28,7 @@ private:
 
 public:	
 	UPROPERTY(EditAnywhere)
-	float ChaseRange = 3000.f;
+		float ChaseRange = 3000.f;
 
 	virtual void Tick(float DeltaTime) override;
 

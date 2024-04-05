@@ -25,13 +25,16 @@ public:
 
 private:
 	UPROPERTY(VisibleAnywhere)
-	class UBoxComponent* AttackTrigger;
+		class UBoxComponent* AttackTrigger;
 
 	UPROPERTY(EditAnywhere)
-	class UAnimMontage* AttackAnimMontage;
+		class UAnimMontage* AttackAnimMontage;
 
 	UPROPERTY(EditAnywhere)
-	float Damage;
+		float Damage;
+
+	UFUNCTION(BluePrintCallable)
+		void MakeDamage();
 
 	class APlayerCharacter* Player;
 

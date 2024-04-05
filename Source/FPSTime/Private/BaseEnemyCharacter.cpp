@@ -30,7 +30,7 @@ void ABaseEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 
 void ABaseEnemyCharacter::Attack()
 {
-	UE_LOG(LogTemp, Warning, TEXT("We Shall Attack"));
+	
 }
 
 void ABaseEnemyCharacter::Destroyed()

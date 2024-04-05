@@ -44,35 +44,36 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float MovementSpeed = 10.f;
+		float MovementSpeed = 10.f;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float LookSpeed = 100.f;
+		float LookSpeed = 100.f;
 
 	UPROPERTY(EditDefaultsOnly)
-	TArray<TSubclassOf<AGun>> GunClasses;
+		TArray<TSubclassOf<AGun>> GunClasses;
 
 	UPROPERTY()
-	TArray<AGun*> Guns;
+		TArray<AGun*> Guns;
 
 	UPROPERTY(EditAnywhere)
-	float ChangeWeaponRate = 1.f;
+		float ChangeWeaponRate = 1.f;
 
 	UFUNCTION(BluePrintPure)
-	AGun* GetCurrentGun();
+		AGun* GetCurrentGun();
 
 	UFUNCTION(BluePrintPure)
-	int GetCurrentGunAmmo();
+		int GetCurrentGunAmmo();
 
 	UFUNCTION(BluePrintPure)
-	int GetRemainingGunAmmo();
+		int GetRemainingGunAmmo();
 
-	UPROPERTY(EditAnywhere)
-	TArray<class UAnimMontage*> ShootAnimMontages;
+	UPROPERTY(EditAnywhere, Category = "Animations")
+		TArray<class UAnimMontage*> ShootAnimMontages;
 
-	UPROPERTY(EditAnywhere)
-	TArray<class UAnimMontage*> ReloadAnimMontages;
+	UPROPERTY(EditAnywhere, Category = "Animations")
+		TArray<class UAnimMontage*> ReloadAnimMontages;
 
+	// Gun properties
 	int CurrentGunIndex = 0;
 	float DeltaSeconds;
 	bool bIsShooting;
@@ -80,13 +81,13 @@ private:
 	FTimerHandle ChangeWeaponTimerHandle;
 	FTimerHandle ShootingTimerHandle;
 
-	// Player Movement
+	// Player Movement Methods
 	void MoveForward(float value);
 	void MoveRight(float value);
 	void LookUp(float value);
 	void LookRight(float value);
 
-	// Gun
+	// Gun Methods
 	void SetGun(int GunIndex);
 	void AddGun(int GunIndex);
 	void ChangeWeapon();

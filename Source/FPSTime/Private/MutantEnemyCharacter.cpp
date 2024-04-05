@@ -43,16 +43,23 @@ void AMutantEnemyCharacter::Attack()
 		{
 			MutantAnimInstance->Montage_Play(AttackAnimMontage);
 		}
-		
-		UHealth* PlayerHealthComponent = Player->FindComponentByClass<UHealth>();
-		if (PlayerHealthComponent)
-		{
-			PlayerHealthComponent->TakeDamage(Damage);
-		}
 	}	
 }
 
 void AMutantEnemyCharacter::Intimidate()
 {
 	UE_LOG(LogTemp, Warning, TEXT("I´m a big and scary motherfucker"));
+}
+
+void AMutantEnemyCharacter::MakeDamage()
+{
+	
+	if (bPlayerInAttackRange && Player)
+	{
+		UHealth* PlayerHealthComponent = Player->FindComponentByClass<UHealth>();
+		if (PlayerHealthComponent)
+		{
+			PlayerHealthComponent->TakeDamage(Damage);
+		}
+	}
 }
