@@ -15,7 +15,7 @@ void AFPSTimePlayerController::BeginPlay()
 
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *CurrentLevelName);
 
-	if (CurrentLevelName != "UEDPIE_0_Map1") 
+	if (CurrentLevelName != "Map1") 
 	{
 		if (MainMenuMusic)
 		{
