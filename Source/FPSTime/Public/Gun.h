@@ -39,52 +39,52 @@ public:
 
 private:
 	UPROPERTY(VisibleAnywhere)
-	USceneComponent* Root;
+		USceneComponent* Root;
 
 	UPROPERTY(VisibleAnywhere)
-	USkeletalMeshComponent* Mesh;
+		USkeletalMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere)
-	AActor* Clip;
+		AActor* Clip;
 
-	UPROPERTY(EditAnywhere)
-	UParticleSystem* MuzzleFlash;
+	UPROPERTY(EditAnywhere, Category  = "FX")
+		UParticleSystem* MuzzleFlash;
 
-	UPROPERTY(EditAnywhere)
-	UParticleSystem* ImpactEffect;
+	UPROPERTY(EditAnywhere, Category = "FX")
+		UParticleSystem* ImpactEffect;
 
-	UPROPERTY(EditAnywhere)
-	USoundBase* FireSound;
+	UPROPERTY(EditAnywhere, Category = "Audio")
+		USoundBase* FireSound;
 
-	UPROPERTY(EditAnywhere)
-	USoundBase* EmptySound;
+	UPROPERTY(EditAnywhere, Category = "Audio")
+		USoundBase* EmptySound;
 
-	UPROPERTY(EditAnywhere)
-	USoundBase* HitSound;
+	UPROPERTY(EditAnywhere, Category = "Audio")
+		USoundBase* HitSound;
 
-	UPROPERTY(EditAnywhere)
-	USoundBase* ReloadSound;
+	UPROPERTY(EditAnywhere, Category = "Audio")
+		USoundBase* ReloadSound;
 
-	UPROPERTY(EditAnywhere)
-	UTexture2D* ImageWeaponBody;
+	UPROPERTY(EditAnywhere, Category = "UI")
+		UTexture2D* ImageWeaponBody;
 
-	UPROPERTY(EditAnywhere)
-	UTexture2D* ImageWeaponMagazine;
+	UPROPERTY(EditAnywhere, Category = "UI")
+		UTexture2D* ImageWeaponMagazine;
 
-	UPROPERTY(EditAnywhere)
-	float MaxRange = 1000.f;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+		float MaxRange = 1000.f;
 
-	UPROPERTY(EditAnywhere)
-	float Damage = 10;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+		float Damage = 10;
 
-	UPROPERTY(EditAnywhere)
-	int StartingBullets = 10;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+		int StartingBullets = 10;
 
-	UPROPERTY(EditAnywhere)
-	int BulletsCapacity = 10;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+		int BulletsCapacity = 10;
 
-	UPROPERTY(EditAnywhere)
-	float ShootingRate = 1000;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+		float ShootingRate = 1000;
 
 	UFUNCTION(BluePrintPure)
 	UTexture2D* GetImageWeaponBody();

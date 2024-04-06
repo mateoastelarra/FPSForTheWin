@@ -23,16 +23,22 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float MaxHealth = 100.f;
+		float MaxHealth = 100.f;
 
 	UPROPERTY(EditAnywhere)
-	float MaxShield = 0.f;
+		float MaxShield = 0.f;
 
 	UPROPERTY(EditAnywhere)
-	float CurrentHealth;
+		float CurrentHealth;
 
 	UPROPERTY(EditAnywhere)
-	float CurrentShield;
+		float CurrentShield;
+
+	UPROPERTY(EditAnywhere, Category = "Audio")
+		USoundBase* HurtSound;
+
+	UPROPERTY(EditAnywhere, Category = "Audio")
+		USoundBase* DeathSound;
 
 public:	
 	// Called every frame

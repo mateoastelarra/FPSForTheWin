@@ -3,6 +3,7 @@
 
 #include "Health.h"
 #include "Destructible.h"
+#include "Kismet/GameplayStatics.h"
 
 UHealth::UHealth()
 {
@@ -38,12 +39,20 @@ void UHealth::TakeDamage(float Damage)
 			IDestructible* Destructible = Cast<IDestructible>(GetOwner());
 			if (Destructible)
 			{
+				if (DeathSound)
+				{
+					UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetOwner()->GetActorLocation());
+				}
 				Destructible->Destroyed();
 			}
 			else
 			{
 				UE_LOG(LogTemp, Error, TEXT("Trying to destroy a non destructible object"));
 			}
+		}
+		else if (HurtSound)
+		{
+			UGameplayStatics::PlaySoundAtLocation(this, HurtSound, GetOwner()->GetActorLocation());
 		}
 	}
 }

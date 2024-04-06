@@ -61,14 +61,14 @@ void AMutantEnemyCharacter::MakeDamage()
 {
 	if (bPlayerInAttackRange && Player)
 	{
+		if (HitSound)
+		{
+			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
+		}
 		UHealth* PlayerHealthComponent = Player->FindComponentByClass<UHealth>();
 		if (PlayerHealthComponent)
 		{
 			PlayerHealthComponent->TakeDamage(Damage);
-		}
-		if (HitSound)
-		{
-			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
 		}
 	}
 	else
