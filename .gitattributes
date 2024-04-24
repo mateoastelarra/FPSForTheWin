@@ -9,3 +9,20 @@
 
 # Exclude html detection
 *.html linguist-language=ignore
+
+/vendor/* linguist-vendored
+/node_modules/* linguist-vendored
+
+*.tmp linguist-generated
+/temp/* linguist-generated
+
+/build/* linguist-generated
+/dist/* linguist-generated
+
+*.config linguist-vendored
+
+/docs/* linguist-vendored
+*.docx linguist-vendored
+
+*.bin linguist-vendored
+*.dat linguist-vendored
